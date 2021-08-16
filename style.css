@@ -7,100 +7,148 @@
 }
 
 .page-container {
-    border: solid red 1px;
-    margin: auto;
-    max-width: 880px;
+  border: solid red 1px;
+  margin: auto;
+  max-width: 880px;
 }
 
 .header {
-    border-bottom: solid #545454 1px;
-    display: flex;
-    justify-content: flex-start;
-    padding: 45px 0 41px;
-    width: 100%;
+  border-bottom: solid #545454 1px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 45px 0 41px;
+  width: 100%;
 }
 
 .logo {
-    width: 173px;
+  width: 173px;
 }
 
 .profile {
-    border: solid red 1px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px 0 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0 50px;
 }
 
 .profile-container {
-    display: flex;
-
+  display: flex;
 }
 
 .profile__avatar {
-    width: 120px;
-    height: 120px;
-    background-image: url(./images/image.jpg);
-    background-position: center;
-    background-size: contain;
-    border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  background-image: url(./images/image.jpg);
+  background-position: center;
+  background-size: contain;
+  border-radius: 50%;
 }
 
 .profile__info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 30px;
 }
 
 .profile__name-container {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .profile__name {
-    margin: 0 18px 16px 0;
-    font-weight: 500;
-    font-size: 42px;
-    line-height: 1.14;
+  margin: 0 18px 16px 0;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1.14;
 }
 
 .profile__edit-button {
-    position: relative;
-    top: -5px;
-    width: 24px;
-    align-self:center
+  position: relative;
+  top: -4px;
+  width: 24px;
+  align-self: center;
 }
 
 .profile__about {
-    margin: 0;
-    font-weight: 400;
-    font-size: 18px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
 }
-
 
 .add-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    border: 2px solid white;
-    border-radius: 2px;
-    width: 150px;
-    height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 2px;
+  width: 150px;
+  height: 50px;
 }
 
+.elements {
+  max-width: 100%;
+}
+
+.elemens-container {
+  border: solid red 1px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-template-rows: repeat(auto-fit, 1fr);
+  row-gap: 16px;
+  column-gap: 16px;
+}
+
+.element {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  border: solid red 1px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.element__image {
+  max-width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+
+.element__data {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.element__like-ikon {
+  margin-right: 18px;
+}
+
+.element__title {
+  margin: 25px 0 31px 21px;
+  color: black;
+  font-size: 24px;
+  font-weight: 900;
+}
 
 .footer {
-    display: flex;
-    justify-content: flex-start;
-    padding: 67px 0 60px;
-    width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 67px 0 60px;
+  width: 100%;
 }
 
 .footer__text {
-    color: #545454;
-    font-weight: 400;
-    margin: 0;
+  color: #545454;
+  font-weight: 400;
+  margin: 0;
 }
