@@ -94,7 +94,6 @@
 }
 
 .elemens-container {
-  border: solid red 1px;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -109,7 +108,6 @@
   align-items: center;
   background-color: white;
   border-radius: 10px;
-  border: solid red 1px;
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -130,7 +128,9 @@
 }
 
 .element__like-ikon {
+  position: relative;
   margin-right: 18px;
+  bottom: 3px;
 }
 
 .element__title {
@@ -138,6 +138,9 @@
   color: black;
   font-size: 24px;
   font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .footer {
