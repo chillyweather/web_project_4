@@ -113,7 +113,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  width: 100%;
+  max-width: 100%;
 }
 
 .element__image {
@@ -125,10 +125,13 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
-.element__like-ikon {
+.element__like-icon {
   position: relative;
+  width: 21px;
+  height: 19px;
   margin-right: 18px;
   bottom: 3px;
 }
@@ -152,6 +155,110 @@
 
 .footer__text {
   color: #545454;
+  font-size: 18px;
   font-weight: 400;
   margin: 0;
+}
+
+@media screen and (max-width: 900px) {
+  .header {
+    padding: 28px 0 32px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .logo {
+    padding-left: 19px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .logo {
+    padding-left: 27px;
+    width: 126px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main {
+    padding-left: 19px;
+    padding-right: 19px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .elemens-container {
+    row-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .elemens-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .footer {
+    padding-top: 50px;
+    padding-bottom: 36px;
+    
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .footer__text {
+    font-size: 14px;
+    padding-left: 19px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+    padding: 42px 0 36px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile__info {
+    margin: 0;
+    align-items: center; 
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile__name-container {
+    margin: 30px 0 0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile__name {
+    font-size: 22px;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile__about {
+    font-size: 14px;
+    margin-top: 14px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .add-button {
+    width: 100%;
+    margin-top: 36px;
+  }
 }
