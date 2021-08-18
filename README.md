@@ -6,15 +6,14 @@ Fourth project for practicum100 front-end program.
 Single-page site. Adaptive design. Basic interactivity.
 
 **Software used**
-* VSCode
-* Figma
-* bash
+
+- VSCode
+- Figma
+- bash
 
 **Technologies used**
 
 CSS Grid, CSS Flexbox, JavaScript
 
-
 **Link**
-
-
+https://chillyweather.github.io/web_project_4/index.html
