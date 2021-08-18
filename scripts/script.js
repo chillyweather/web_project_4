@@ -1,16 +1,16 @@
-const profileEditButton = document.querySelector('.profile__edit-button');
+let profileEditButton = document.querySelector('.profile__edit-button');
 
-const popupForm = document.querySelector('.popup');
-const popupCloseButton = document.querySelector('.popup__close-button');
-const submitProfileInfoButton = document.querySelector('.popup__submit-button');
+let popupForm = document.querySelector('.popup');
+let popupCloseButton = document.querySelector('.popup__close-button');
+let submitProfileInfoButton = document.querySelector('.popup__submit-button');
 
 // form inputs
-const inputName = document.querySelector('.popup__submit-text_name');
-const inputAbout = document.querySelector('.popup__submit-text_about');
+let inputName = document.querySelector('.popup__submit-text_name');
+let inputAbout = document.querySelector('.popup__submit-text_about');
 
 // text in profile
-const profileName = document.querySelector('.profile__name');
-const profileAbout = document.querySelector('.profile__about');
+let profileName = document.querySelector('.profile__name');
+let profileAbout = document.querySelector('.profile__about');
 
 // toggle popup window function
 function togglePopup() {
