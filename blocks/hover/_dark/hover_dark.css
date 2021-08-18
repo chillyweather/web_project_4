@@ -1,8 +1,8 @@
-.hover_sixty {
+.hover_dark {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
-.hover_sixty:hover {
-  opacity: 0.6;
+.hover_dark:hover {
+  opacity: 0.8;
 }
