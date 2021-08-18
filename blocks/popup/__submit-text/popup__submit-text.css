@@ -1,0 +1,13 @@
+.popup__submit-text {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  padding: 0 0 13.3px 0;
+  margin-top: 30px;
+  color: black;
+}
+
+.popup__submit-text:focus {
+  outline: none;
+}

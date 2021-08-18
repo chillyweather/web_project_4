@@ -1,0 +1,23 @@
+.elemens-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-template-rows: repeat(auto-fit, 1fr);
+  row-gap: 16px;
+  column-gap: 16px;
+}
+
+@media screen and (max-width: 900px) {
+  .elemens-container {
+    row-gap: 20px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .elemens-container {
+    display: flex;
+    flex-direction: column;
+  }
+}

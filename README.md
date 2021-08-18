@@ -2,15 +2,19 @@
 
 ### Overview
 
+Fourth project for practicum100 front-end program.
+Single-page site. Adaptive design. Basic interactivity.
+
+**Software used**
+* VSCode
 * Figma
-* Images
+* bash
 
-**Figma**
+**Technologies used**
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+CSS Grid, CSS Flexbox, JavaScript
 
-**Images**
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+**Link**
 
-Have fun with JavaScript!
+

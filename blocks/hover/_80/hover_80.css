@@ -1,0 +1,8 @@
+.hover_80 {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.hover_80:hover {
+  opacity: 0.8;
+}

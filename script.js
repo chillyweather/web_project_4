@@ -6,8 +6,6 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 
 const submitProfileInfoButton = document.querySelector('.popup__submit-button');
 
-console.log(likeButton);
-
 // form inputs
 const inputName = document.querySelector('.popup__submit-text_name');
 const inputAbout = document.querySelector('.popup__submit-text_about');
