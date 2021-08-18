@@ -1,5 +1,5 @@
 const profileEditButton = document.querySelector('.profile__edit-button');
-console.log(profileEditButton);
+
 const popupForm = document.querySelector('.popup');
 const popupCloseButton = document.querySelector('.popup__close-button');
 const submitProfileInfoButton = document.querySelector('.popup__submit-button');
@@ -15,9 +15,8 @@ const profileAbout = document.querySelector('.profile__about');
 // toggle popup window function
 function togglePopup() {
   popupForm.classList.toggle('popup_opened');
-  console.log(popupForm);
-  // inputName.value = profileName.textContent;
-  // inputAbout.value = profileAbout.textContent;
+  inputName.value = profileName.textContent;
+  inputAbout.value = profileAbout.textContent;
 }
 
 function submitProfileInfo(event) {
