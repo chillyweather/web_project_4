@@ -1,9 +1,7 @@
-const popupForm = document.querySelector('.popup');
-
-const popupCloseButton = document.querySelector('.popup__close-button');
-
 const profileEditButton = document.querySelector('.profile__edit-button');
-
+console.log(profileEditButton);
+const popupForm = document.querySelector('.popup');
+const popupCloseButton = document.querySelector('.popup__close-button');
 const submitProfileInfoButton = document.querySelector('.popup__submit-button');
 
 // form inputs
@@ -17,11 +15,10 @@ const profileAbout = document.querySelector('.profile__about');
 // toggle popup window function
 function togglePopup() {
   popupForm.classList.toggle('popup_opened');
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
+  console.log(popupForm);
+  // inputName.value = profileName.textContent;
+  // inputAbout.value = profileAbout.textContent;
 }
-
-// update profile info function
 
 function submitProfileInfo(event) {
   event.preventDefault();
@@ -30,16 +27,6 @@ function submitProfileInfo(event) {
   togglePopup();
 }
 
-// elemetns like buttons toggle
-// later...
-// function toggleLike() {
-
-// }
-
-profileEditButton.addEventListener('click', togglePopup);
-
-popupCloseButton.addEventListener('click', togglePopup);
-
 submitProfileInfoButton.addEventListener('click', submitProfileInfo);
-
-// likeButton.addEventListener('click', toggleLike);
+profileEditButton.addEventListener('click', togglePopup);
+popupCloseButton.addEventListener('click', togglePopup);
