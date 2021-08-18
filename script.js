@@ -6,7 +6,7 @@ const profileEditButton = document.querySelector('.profile__edit-button');
 
 const submitProfileInfoButton = document.querySelector('.popup__submit-button');
 
-const likeButton = document.querySelector('.element__like-icon');
+console.log(likeButton);
 
 // form inputs
 const inputName = document.querySelector('.popup__submit-text_name');
@@ -33,13 +33,10 @@ function submitProfileInfo(event) {
 }
 
 // elemetns like buttons toggle
-function toggleLike() {
-  if (likeButton.src == './images/svg/Heart.svg') {
-    likeButton.setAttribute('src', './images/svg/Heart_black.svg');
-  } else {
-    likeButton.setAttribute('src', './images/svg/Heart.svg');
-  }
-}
+// later...
+// function toggleLike() {
+
+// }
 
 profileEditButton.addEventListener('click', togglePopup);
 
@@ -47,4 +44,4 @@ popupCloseButton.addEventListener('click', togglePopup);
 
 submitProfileInfoButton.addEventListener('click', submitProfileInfo);
 
-likeButton.addEventListener('click', toggleLike);
+// likeButton.addEventListener('click', toggleLike);
