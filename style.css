@@ -6,7 +6,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.page-container {
+.page__container {
   margin: auto;
   max-width: 880px;
 }
@@ -167,7 +167,7 @@
   font-size: 18px;
 }
 
-.add-button {
+.profile__add-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -183,7 +183,7 @@
   max-width: 100%;
 }
 
-.elemens-container {
+.elemens__container {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -218,7 +218,7 @@
   align-items: center;
 }
 
-.element__like-icon {
+.element__like-button {
   padding-bottom: 8px;
   width: 21px;
   height: 19px;
@@ -277,13 +277,13 @@
 }
 
 @media screen and (max-width: 900px) {
-  .elemens-container {
+  .elemens__container {
     row-gap: 20px;
   }
 }
 
 @media screen and (max-width: 450px) {
-  .elemens-container {
+  .elemens__container {
     display: flex;
     flex-direction: column;
   }
@@ -354,7 +354,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .add-button {
+  .profile__add-button {
     width: 100%;
     margin-top: 36px;
   }

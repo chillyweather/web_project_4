@@ -1,13 +1,11 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
 
-@import url(../blocks/add-button/add-button.css);
-
-@import url(../blocks/elemens-container/elemens-container.css);
+@import url(../blocks/elements/__container/elemens__container.css);
 @import url(../blocks/element/element.css);
 @import url(../blocks/element/__data/element__data.css);
 @import url(../blocks/element/__image/element__image.css);
-@import url(../blocks/element/__like-icon/element__like-icon.css);
+@import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/elements/elements.css);
 
@@ -16,15 +14,16 @@
 
 @import url(../blocks/header/header.css);
 
-@import url(../blocks/hover/_light/hover_light.css);
-@import url(../blocks/hover/_dark/hover_dark.css);
+@import url(../blocks/hover/_opacity/hover_opacity_fifty.css);
+@import url(../blocks/hover/_opacity/hover_opacity_sixty.css);
+@import url(../blocks/hover/_opacity/hover_opacity_eighty.css);
 
 @import url(../blocks/logo/logo.css);
 
 @import url(../blocks/main/main.css);
 
 @import url(../blocks/page/page.css);
-@import url(../blocks/page-container/page-container.css);
+@import url(../blocks/page/__container/page__container.css);
 
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
@@ -35,9 +34,11 @@
 @import url(../blocks/popup/__title/popup__title.css);
 
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__about/profile__about.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
+@import url(../blocks/profile/__edit-button/__image/profile__edit-button__image.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__name-container/profile__name-container.css);

@@ -13,19 +13,22 @@
 <body class="page">
   <div class="popup">
     <div class="popup__container">
-      <img src="./images/svg/close_icon.svg" alt="Close button" class="popup__close-button hover hover_light" />
+      <button class="popup__close-button hover hover_opacity_sixty" type="button">
+        <img src="./images/svg/close_icon.svg" alt="Close button" />
+      </button>
 
-      <h3 class="popup__title">Edit content</h3>
-      <form action="#">
-        <input type="text" name="Name" id="name" class="popup__submit-text popup__submit-text_name" value="" />
-        <input type="text" name="About me" id="about-me" value="" class="popup__submit-text popup__submit-text_about" />
+      <h2 class="popup__title">Edit content</h2>
+      <form class="popup__content" name="popup-content" action="#">
+        <input type="text" name="Name" id="name" class="popup__submit-text popup__submit-text_content_name" value="" />
+        <input type="text" name="About me" id="about-me" value=""
+          class="popup__submit-text popup__submit-text_content_about" />
       </form>
-      <button type="submit" class="popup__submit-button hover hover_dark">
+      <button type="submit" class="popup__submit-button hover hover_opacity_eighty">
         Save
       </button>
     </div>
   </div>
-  <div class="page-container">
+  <div class="page__container">
     <header class="header">
       <img src="./images/svg/logo.svg" alt="Around the U.S. logo" class="logo" />
     </header>
@@ -36,59 +39,60 @@
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Jacques Cousteau</h1>
-              <img src="./images/svg/edit_button.svg" alt="Edit Button" class="profile__edit-button hover hover_light" />
+              <button class="profile__edit-button hover hover_opacity_sixty" type="button">
+              </button>
             </div>
             <p class="profile__about">Explorer</p>
           </div>
         </div>
-        <button class="add-button hover hover_light">
-          <img src="./images/svg/Plus.svg" alt="Add element button" class="add-button__plus-symbol hover hover_light" />
+        <button class="profile__add-button hover hover_opacity_sixty" type="button">
         </button>
       </section>
       <section class="elements">
-        <ul class="elemens-container">
+        <ul class="elemens__container">
           <li class="element">
             <img src="./images/kirill-pershin-1088404-unsplash-1.jpg" alt="Yosemite Valley" class="element__image" />
             <div class="element__data">
-              <h3 class="element__title">Yosemite Valley</h3>
-              <img src="./images/svg/Heart.svg" alt="like icon"
-                class="element__like-icon element__like-icon_off hover hover_light" />
+              <h2 class="element__title">Yosemite Valley</h2>
+
+              <button class="element__like-button hover hover_opacity_fifty" type="button"></button>
+
             </div>
           </li>
           <li class="element">
             <img src="./images/kirill-pershin-1088404-unsplash.jpg" alt="Lake Louise" class="element__image" />
             <div class="element__data">
-              <h3 class="element__title">Lake Louise</h3>
-              <img src="./images/svg/Heart.svg" alt="like icon" class="element__like-icon hover hover_light" />
+              <h2 class="element__title">Lake Louise</h2>
+              <button class="element__like-button hover hover_opacity_fifty" type="button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/kirill-pershin-1404681-unsplash-1.jpg" alt="Bald Mountains" class="element__image" />
             <div class="element__data">
-              <h3 class="element__title">Bald Mountains</h3>
-              <img src="./images/svg/Heart.svg" alt="like icon" class="element__like-icon hover hover_light" />
+              <h2 class="element__title">Bald Mountains</h2>
+              <button class="element__like-button hover hover_opacity_fifty" type="button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/kirill-pershin-1404681-unsplash.jpg" alt="Latemar" class="element__image" />
             <div class="element__data">
-              <h3 class="element__title">Latemar</h3>
-              <img src="./images/svg/Heart.svg" alt="like icon" class="element__like-icon hover hover_light" />
+              <h2 class="element__title">Latemar</h2>
+              <button class="element__like-button hover hover_opacity_fifty" type="button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/kirill-pershin-1556355-unsplash-1.jpg" alt="Vanoise National Park"
               class="element__image" />
             <div class="element__data">
-              <h3 class="element__title">Vanoise National Park</h3>
-              <img src="./images/svg/Heart.svg" alt="like icon" class="element__like-icon hover hover_light" />
+              <h2 class="element__title">Vanoise National Park</h2>
+              <button class="element__like-button hover hover_opacity_fifty" type="button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/kirill-pershin-1556355-unsplash.jpg" alt="Lago gi Braies" class="element__image" />
             <div class="element__data">
-              <h3 class="element__title">Lago di Braies</h3>
-              <img src="./images/svg/Heart.svg" alt="like icon" class="element__like-icon hover hover_light" />
+              <h2 class="element__title">Lago di Braies</h2>
+              <button class="element__like-button hover hover_opacity_fifty" type="button"></button>
             </div>
           </li>
         </ul>

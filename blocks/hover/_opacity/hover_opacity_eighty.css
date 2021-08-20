@@ -1,8 +1,8 @@
-.hover_dark {
+.hover_opacity_eighty {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
 }
 
-.hover_dark:hover {
+.hover_opacity_eighty:hover {
   opacity: 0.8;
 }

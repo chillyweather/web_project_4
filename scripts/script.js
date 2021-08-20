@@ -5,8 +5,8 @@ let popupCloseButton = document.querySelector('.popup__close-button');
 let submitProfileInfoButton = document.querySelector('.popup__submit-button');
 
 // form inputs
-let inputName = document.querySelector('.popup__submit-text_name');
-let inputAbout = document.querySelector('.popup__submit-text_about');
+let inputName = document.querySelector('.popup__submit-text_content_name');
+let inputAbout = document.querySelector('.popup__submit-text_content_about');
 
 // text in profile
 let profileName = document.querySelector('.profile__name');
