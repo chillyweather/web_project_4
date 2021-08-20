@@ -8,7 +8,7 @@
 
 @media screen and (max-width: 600px) {
   .popup__close-button {
-    top: -62px;
-    right: 7px;
+    margin-right: -29px;
+    margin-top: -90px;
   }
 }
