@@ -11,8 +11,7 @@
 
 .popup__submit-text:focus {
   outline: none;
-  font-size: 14px;
-  line-height: 17px;
+  background-color: rgba(211, 211, 211, 0.329);
 }
 
 @media screen and (max-width: 600px) {
