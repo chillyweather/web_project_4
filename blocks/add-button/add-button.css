@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
+  background-color: transparent;
   border: 2px solid white;
   border-radius: 2px;
   width: 150px;
