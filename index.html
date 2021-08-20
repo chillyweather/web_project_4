@@ -12,20 +12,26 @@
 
 <body class="page">
   <div class="popup">
+    <!-- I tried to move this block to the bottom, but popup stops working
+    probably problem in index.css (order of paths or smth else...)
+    I'll fix it later -->
     <div class="popup__container">
       <button class="popup__close-button hover hover_opacity_sixty" type="button">
         <img src="./images/svg/close_icon.svg" alt="Close button" />
       </button>
 
       <h2 class="popup__title">Edit content</h2>
+
       <form class="popup__content" name="popup-content" action="#">
         <input type="text" name="Name" id="name" class="popup__submit-text popup__submit-text_content_name" value="" />
+
         <input type="text" name="About me" id="about-me" value=""
           class="popup__submit-text popup__submit-text_content_about" />
+        <button type="submit" class="popup__submit-button hover hover_opacity_eighty">Save
+        </button>
       </form>
-      <button type="submit" class="popup__submit-button hover hover_opacity_eighty">
-        Save
-      </button>
+
+
     </div>
   </div>
   <div class="page__container">
@@ -39,14 +45,12 @@
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Jacques Cousteau</h1>
-              <button class="profile__edit-button hover hover_opacity_sixty" type="button">
-              </button>
+              <button class="profile__edit-button hover hover_opacity_sixty" type="button"></button>
             </div>
             <p class="profile__about">Explorer</p>
           </div>
         </div>
-        <button class="profile__add-button hover hover_opacity_sixty" type="button">
-        </button>
+        <button class="profile__add-button hover hover_opacity_sixty" type="button"></button>
       </section>
       <section class="elements">
         <ul class="elemens__container">
@@ -56,7 +60,6 @@
               <h2 class="element__title">Yosemite Valley</h2>
 
               <button class="element__like-button hover hover_opacity_fifty" type="button"></button>
-
             </div>
           </li>
           <li class="element">

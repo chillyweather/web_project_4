@@ -1,31 +1,35 @@
-let profileEditButton = document.querySelector('.profile__edit-button');
+const profileEditButton = document.querySelector('.profile__edit-button');
 
-let popupForm = document.querySelector('.popup');
-let popupCloseButton = document.querySelector('.popup__close-button');
-let submitProfileInfoButton = document.querySelector('.popup__submit-button');
+const popupForm = document.querySelector('.popup');
+
+const popupCloseButton = document.querySelector('.popup__close-button');
 
 // form inputs
-let inputName = document.querySelector('.popup__submit-text_content_name');
-let inputAbout = document.querySelector('.popup__submit-text_content_about');
+const nameInput = document.querySelector('.popup__submit-text_content_name');
+const jobInput = document.querySelector('.popup__submit-text_content_about');
 
 // text in profile
-let profileName = document.querySelector('.profile__name');
-let profileAbout = document.querySelector('.profile__about');
+const profileName = document.querySelector('.profile__name');
+const profileAbout = document.querySelector('.profile__about');
 
-// toggle popup window function
-function togglePopup() {
-  popupForm.classList.toggle('popup_opened');
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
+const form = document.querySelector('.popup__content');
+
+function openPopup() {
+  popupForm.classList.add('popup_opened');
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileAbout.textContent;
 }
 
-function submitProfileInfo(event) {
-  event.preventDefault();
-  profileName.textContent = inputName.value;
-  profileAbout.textContent = inputAbout.value;
-  togglePopup();
+function closePopup() {
+  popupForm.classList.remove('popup_opened');
 }
 
-submitProfileInfoButton.addEventListener('click', submitProfileInfo);
-profileEditButton.addEventListener('click', togglePopup);
-popupCloseButton.addEventListener('click', togglePopup);
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileAbout.textContent = jobInput.value;
+  closePopup();
+});
+
+profileEditButton.addEventListener('click', openPopup);
+popupCloseButton.addEventListener('click', closePopup);
