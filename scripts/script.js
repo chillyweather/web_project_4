@@ -24,12 +24,14 @@ function closePopup() {
   popupForm.classList.remove('popup_opened');
 }
 
-form.addEventListener('submit', (e) => {
+function submitData(e) {
   e.preventDefault();
   profileName.textContent = nameInput.value;
   profileAbout.textContent = jobInput.value;
   closePopup();
-});
+}
+
+form.addEventListener('submit', submitData);
 
 profileEditButton.addEventListener('click', openPopup);
 popupCloseButton.addEventListener('click', closePopup);
