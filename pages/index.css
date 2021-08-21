@@ -17,6 +17,7 @@
 @import url(../blocks/hover/_opacity/hover_opacity_light.css);
 @import url(../blocks/hover/_opacity/hover_opacity_middle.css);
 @import url(../blocks/hover/_opacity/hover_opacity_dark.css);
+@import url(../blocks/hover/hover.css);
 
 @import url(../blocks/logo/logo.css);
 
