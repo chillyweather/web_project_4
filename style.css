@@ -120,7 +120,7 @@
   padding: 40px 0 50px;
 }
 
-.profile-container {
+.profile__container {
   display: flex;
 }
 
@@ -312,7 +312,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .profile-container {
+  .profile__container {
     flex-direction: column;
     align-items: center;
   }
