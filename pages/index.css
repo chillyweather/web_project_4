@@ -14,9 +14,9 @@
 
 @import url(../blocks/header/header.css);
 
-@import url(../blocks/hover/_opacity/hover_opacity_fifty.css);
-@import url(../blocks/hover/_opacity/hover_opacity_sixty.css);
-@import url(../blocks/hover/_opacity/hover_opacity_eighty.css);
+@import url(../blocks/hover/_opacity/hover_opacity_light.css);
+@import url(../blocks/hover/_opacity/hover_opacity_middle.css);
+@import url(../blocks/hover/_opacity/hover_opacity_dark.css);
 
 @import url(../blocks/logo/logo.css);
 

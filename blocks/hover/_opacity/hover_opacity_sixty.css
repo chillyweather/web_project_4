@@ -1,8 +1,0 @@
-.hover_opacity_sixty {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.hover_opacity_sixty:hover {
-  opacity: 0.6;
-}

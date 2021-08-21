@@ -1,8 +1,0 @@
-.hover_opacity_fifty {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.hover_opacity_fifty:hover {
-  opacity: 0.5;
-}

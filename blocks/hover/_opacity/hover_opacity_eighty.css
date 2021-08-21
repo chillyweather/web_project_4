@@ -1,8 +1,0 @@
-.hover_opacity_eighty {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.hover_opacity_eighty:hover {
-  opacity: 0.8;
-}
