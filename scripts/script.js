@@ -1,10 +1,3 @@
-const profileEditButton = document.querySelector('.profile__edit-button');
-
-const popupForm = document.querySelector('.popup');
-
-const popupCloseButton = document.querySelector('.popup__close-button');
-
-// initial cards
 const initialCards = [
   {
     name: 'Yosemite Valley',
@@ -32,6 +25,18 @@ const initialCards = [
   },
 ];
 
+// buttons
+
+const profileEditButton = document.querySelector('.profile__edit-button');
+
+const popupForm = document.querySelector('.popup');
+
+const popupCloseButton = document.querySelector('.popup__close-button');
+
+// creating element card from template
+
+// initial cards
+
 // form inputs
 const nameInput = document.querySelector('.popup__submit-text_content_name');
 const jobInput = document.querySelector('.popup__submit-text_content_about');
@@ -41,6 +46,8 @@ const profileName = document.querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile__about');
 
 const form = document.querySelector('.popup__content');
+
+// functions
 
 function openPopup() {
   popupForm.classList.add('popup_opened');
@@ -59,7 +66,24 @@ function submitData(e) {
   closePopup();
 }
 
-form.addEventListener('submit', submitData);
+// initialCards.forEach((item) => {
+//   const elementTemplate = document.querySelector('#element-template').content.querySelector('.element');
+// });
 
+initialCards.forEach((item) => {
+  const elementTemplate = document.querySelector('#element-template').content;
+  const elementsContainer = document.querySelector('.elements__container');
+
+  const newElement = elementTemplate.querySelector('.element').cloneNode(true);
+
+  newElement.querySelector('.element__title').textContent = item.name;
+  newElement.querySelector('.element__image').src = item.link;
+
+  elementsContainer.append(newElement);
+});
+
+// event listeners
+
+form.addEventListener('submit', submitData);
 profileEditButton.addEventListener('click', openPopup);
 popupCloseButton.addEventListener('click', closePopup);
