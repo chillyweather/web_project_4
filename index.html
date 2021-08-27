@@ -1,106 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <title>Around the U.S.</title>
-  </head>
 
-  <body class="page">
-    <div class="page__container">
-      <header class="header">
-        <img
-          src="./images/svg/logo.svg"
-          alt="Around the U.S. logo"
-          class="logo"
-        />
-      </header>
-      <main class="main">
-        <section class="profile">
-          <div class="profile__container">
-            <div class="profile__avatar"></div>
-            <div class="profile__info">
-              <div class="profile__name-container">
-                <h1 class="profile__name">Jacques Cousteau</h1>
-                <button
-                  class="profile__edit-button hover hover_opacity_middle"
-                  type="button"
-                  aria-label="Edit"
-                ></button>
-              </div>
-              <p class="profile__about">Explorer</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./pages/index.css" />
+  <title>Around the U.S.</title>
+</head>
+
+<body class="page">
+  <div class="page__container">
+    <header class="header">
+      <img src="./images/svg/logo.svg" alt="Around the U.S. logo" class="logo" />
+    </header>
+    <main class="main">
+      <section class="profile">
+        <div class="profile__container">
+          <div class="profile__avatar"></div>
+          <div class="profile__info">
+            <div class="profile__name-container">
+              <h1 class="profile__name">Jacques Cousteau</h1>
+              <button class="profile__edit-button hover hover_opacity_middle" type="button" aria-label="Edit"></button>
             </div>
+            <p class="profile__about">Explorer</p>
           </div>
-          <button
-            class="profile__add-button hover hover_opacity_middle"
-            type="button"
-            aria-label="Add element"
-          ></button>
-        </section>
-        <section class="elements">
-          <ul class="elements__container"></ul>
-        </section>
-      </main>
-      <footer class="footer">
-        <p class="footer__text">© 2021 Around The U.S.</p>
-      </footer>
+        </div>
+        <button class="profile__add-button hover hover_opacity_middle" type="button" aria-label="Add element"></button>
+      </section>
+      <section class="elements">
+        <ul class="elements__container"></ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__text">© 2021 Around The U.S.</p>
+    </footer>
+  </div>
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-button hover hover_opacity_middle" type="button" aria-label="Close"></button>
+
+      <h2 class="popup__title">Edit content</h2>
+
+      <form class="popup__content" name="popup-content" action="#">
+        <input type="text" name="Name" id="name" class="popup__submit-text popup__submit-text_content_name" value="" />
+
+        <input type="text" name="about-me" id="about-me" value=""
+          class="popup__submit-text popup__submit-text_content_about" />
+        <button type="submit" class="popup__submit-button hover hover_opacity_dark">
+          Save
+        </button>
+      </form>
     </div>
+  </div>
+  <template id="element-template">
+    <li class="element">
+      <button class="element__trash-button hover hover_opacity_middle" type="button"
+        aria-label="Delete button"></button>
+      <img src="/" alt="" class="element__image" />
+      <div class="element__data">
+        <h2 class="element__title"></h2>
+        <button class="element__like-button hover hover_opacity_light" type="button" aria-label="Like button"></button>
+      </div>
+    </li>
+  </template>
+  <template class="popup-template">
     <div class="popup">
       <div class="popup__container">
-        <button
-          class="popup__close-button hover hover_opacity_middle"
-          type="button"
-          aria-label="Close"
-        ></button>
+        <button class="popup__close-button hover hover_opacity_middle" type="button" aria-label="Close"></button>
 
-        <h2 class="popup__title">Edit content</h2>
+        <h2 class="popup__title"></h2>
 
         <form class="popup__content" name="popup-content" action="#">
-          <input
-            type="text"
-            name="Name"
-            id="name"
-            class="popup__submit-text popup__submit-text_content_name"
-            value=""
-          />
+          <input type="text" name="" id="" class="" value="" />
 
-          <input
-            type="text"
-            name="about-me"
-            id="about-me"
-            value=""
-            class="popup__submit-text popup__submit-text_content_about"
-          />
-          <button
-            type="submit"
-            class="popup__submit-button hover hover_opacity_dark"
-          >
-            Save
-          </button>
+          <input type="text" name="" id="" class="" value="" />
+          <button type="submit" class="popup__submit-button hover hover_opacity_dark"></button>
         </form>
       </div>
     </div>
-    <template id="element-template">
-      <li class="element">
-        <button
-          class="element__trash-button hover hover_opacity_middle"
-          type="button"
-          aria-label="Delete button"
-        ></button>
-        <img src="" alt="" class="element__image" />
-        <div class="element__data">
-          <h2 class="element__title"></h2>
-          <button
-            class="element__like-button hover hover_opacity_light"
-            type="button"
-            aria-label="Like button"
-          ></button>
-        </div>
-      </li>
-    </template>
-    <script src="./scripts/script.js"></script>
+  </template>
+  <script src="./scripts/script.js"></script>
 
-  </body>
+</body>
+
 </html>

@@ -1,4 +1,5 @@
 node_modules
+tmp_notes.txt
 package-lock.json
 package.json
 .eslintrc.json

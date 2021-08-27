@@ -1,3 +1,4 @@
+// initial element cards
 const initialCards = [
   {
     name: 'Yosemite Valley',
@@ -25,13 +26,12 @@ const initialCards = [
   },
 ];
 
-// buttons
-
+// popup buttons
 const profileEditButton = document.querySelector('.profile__edit-button');
+const addElementButton = document.querySelector('.profile__add-button');
+const popupCloseButton = document.querySelector('.popup__close-button');
 
 const popupForm = document.querySelector('.popup');
-
-const popupCloseButton = document.querySelector('.popup__close-button');
 
 // creating element card from template
 
@@ -65,10 +65,9 @@ function submitData(e) {
   profileAbout.textContent = jobInput.value;
   closePopup();
 }
-
-// initialCards.forEach((item) => {
-//   const elementTemplate = document.querySelector('#element-template').content.querySelector('.element');
-// });
+/// /////////////////////
+// Initial cards creation
+/// /////////////////////
 
 initialCards.forEach((item) => {
   const elementTemplate = document.querySelector('#element-template').content;
@@ -81,9 +80,14 @@ initialCards.forEach((item) => {
 
   elementsContainer.append(newElement);
 });
-
+/// ///////////////
 // event listeners
+/// ///////////////
+
+// edit profile
+profileEditButton.addEventListener('click', openPopup);
+// add element card
+addElementButton.addEventListener('click', openPopup);
 
 form.addEventListener('submit', submitData);
-profileEditButton.addEventListener('click', openPopup);
 popupCloseButton.addEventListener('click', closePopup);
