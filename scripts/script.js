@@ -69,17 +69,18 @@ function submitData(e) {
 // Initial cards creation
 /// /////////////////////
 
-initialCards.forEach((item) => {
-  const elementTemplate = document.querySelector('#element-template').content;
-  const elementsContainer = document.querySelector('.elements__container');
+const elementTemplate = document.querySelector('#element-template').content;
+const elementsContainer = document.querySelector('.elements__container');
 
+function createCard(name, link) {
   const newElement = elementTemplate.querySelector('.element').cloneNode(true);
 
-  newElement.querySelector('.element__title').textContent = item.name;
-  newElement.querySelector('.element__image').src = item.link;
+  newElement.querySelector('.element__title').textContent = name;
+  newElement.querySelector('.element__image').src = link;
+  return newElement;
+}
 
-  elementsContainer.append(newElement);
-});
+initialCards.forEach((item) => elementsContainer.append(createCard(item.name, item.link)));
 /// ///////////////
 // event listeners
 /// ///////////////
