@@ -1,5 +1,13 @@
 .popup__container_type_preview {
-  object-fit: fill;
+  background-color: transparent;
   padding: 0;
   max-width: 75vw;
+  max-height: 75vh;
+  border-radius: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__container_type_preview {
+    max-width: 91%;
+  }
 }

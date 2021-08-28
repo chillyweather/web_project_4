@@ -1,0 +1,13 @@
+.popup__close-button_type_preview {
+  right: 1px;
+  top: -23px;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__close-button_type_preview {
+    width: 24px;
+    height: 24px;
+    right: 13px;
+    top: -11px;
+  }
+}
