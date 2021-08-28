@@ -26,16 +26,17 @@ const initialCards = [
   },
 ];
 
-// popup buttons
+// open popup buttons
 const profileEditButton = document.querySelector('.profile__edit-button');
 const addElementButton = document.querySelector('.profile__add-button');
-const popupCloseButton = document.querySelector('.popup__close-button');
 
-const popupForm = document.querySelector('.popup');
+// popups
+const popupEditProfile = document.querySelector('.popup_type_profile');
+const popupAddElement = document.querySelector('.popup_type_add-element');
 
-// creating element card from template
-
-// initial cards
+// close popup buttons
+const popupEditProfileCloseButton = document.querySelector('.popup__close-button_type_profile');
+const popupAddElementCloseButton = document.querySelector('.popup__close-button_type_add-element');
 
 // form inputs
 const nameInput = document.querySelector('.popup__submit-text_content_name');
@@ -47,16 +48,16 @@ const profileAbout = document.querySelector('.profile__about');
 
 const form = document.querySelector('.popup__content');
 
-// functions
+// popup functions
 
-function openPopup() {
-  popupForm.classList.add('popup_opened');
+function openEditProfilePopup() {
+  popupEditProfile.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileAbout.textContent;
 }
 
 function closePopup() {
-  popupForm.classList.remove('popup_opened');
+  popupEditProfile.classList.remove('popup_opened');
 }
 
 function submitData(e) {
@@ -65,6 +66,7 @@ function submitData(e) {
   profileAbout.textContent = jobInput.value;
   closePopup();
 }
+
 /// /////////////////////
 // Initial cards creation
 /// /////////////////////
@@ -72,23 +74,24 @@ function submitData(e) {
 const elementTemplate = document.querySelector('#element-template').content;
 const elementsContainer = document.querySelector('.elements__container');
 
+// create card
 function createCard(name, link) {
   const newElement = elementTemplate.querySelector('.element').cloneNode(true);
-
   newElement.querySelector('.element__title').textContent = name;
   newElement.querySelector('.element__image').src = link;
   return newElement;
 }
-
+// iterate through array and append card
 initialCards.forEach((item) => elementsContainer.append(createCard(item.name, item.link)));
+
 /// ///////////////
 // event listeners
 /// ///////////////
 
 // edit profile
-profileEditButton.addEventListener('click', openPopup);
+profileEditButton.addEventListener('click', openEditProfilePopup);
 // add element card
-addElementButton.addEventListener('click', openPopup);
+// addElementButton.addEventListener('click', openPopup);
 
 form.addEventListener('submit', submitData);
-popupCloseButton.addEventListener('click', closePopup);
+popupEditProfileCloseButton.addEventListener('click', closePopup);
