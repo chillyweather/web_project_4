@@ -1,0 +1,8 @@
+.popup__container_content_preview {
+  margin: 0;
+  width: 75vw;
+  height: 75vh;
+  border-radius: 0;
+  /* background-color: transparent; */
+  padding: 0;
+}

@@ -29,7 +29,16 @@
         <button class="profile__add-button hover hover_opacity_middle" type="button" aria-label="Add element"></button>
       </section>
       <section class="elements">
-        <ul class="elements__container"></ul>
+        <ul class="elements__container">
+          <!-- <li class="element">
+            <button class="element__trash-button hover hover_opacity_middle" type="button" aria-label="Delete button"></button>
+            <img src="https://code.s3.yandex.net/web-code/lago.jpg" alt="" class="element__image" />
+            <div class="element__data">
+              <h2 class="element__title"></h2>
+              <button class="element__like-button hover hover_opacity_light" type="button" aria-label="Like button"></button>
+            </div>
+          </li> -->
+        </ul>
       </section>
     </main>
     <footer class="footer">
@@ -43,7 +52,7 @@
 
       <h2 class="popup__title">Edit content</h2>
 
-      <form class="popup__content" name="popup-content" action="#">
+      <form class="popup__content popup__content_type_edit-profile" name="popup-content" action="#">
         <input type="text" name="Name" id="name" class="popup__submit-text popup__submit-text_content_name" value="" />
 
         <input type="text" name="about-me" id="about-me" value=""
@@ -61,11 +70,12 @@
 
       <h2 class="popup__title">New place</h2>
 
-      <form class="popup__content" name="popup-content" action="#">
-        <input type="text" name="Name" id="name" class="popup__submit-text popup__submit-text_content_name" value="" />
+      <form class="popup__content popup__content_type_add-element" name="popup-content" action="#">
 
-        <input type="text" name="about-me" id="about-me" value=""
-          class="popup__submit-text popup__submit-text_content_about" />
+        <input type="text" name="Place" id="place" class="popup__submit-text popup__submit-text_content_place" placeholder="Title" value="" />
+
+        <input type="url" name="link" id="link" value="" placeholder="Image link"
+          class="popup__submit-text popup__submit-text_content_link" />
         <button type="submit" class="popup__submit-button hover hover_opacity_dark">
           Create
         </button>
