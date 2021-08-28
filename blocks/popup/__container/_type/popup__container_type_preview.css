@@ -1,0 +1,5 @@
+.popup__container_type_preview {
+  object-fit: fill;
+  padding: 0;
+  max-width: 75vw;
+}

@@ -30,14 +30,7 @@
       </section>
       <section class="elements">
         <ul class="elements__container">
-          <!-- <li class="element">
-            <button class="element__trash-button hover hover_opacity_middle" type="button" aria-label="Delete button"></button>
-            <img src="https://code.s3.yandex.net/web-code/lago.jpg" alt="" class="element__image" />
-            <div class="element__data">
-              <h2 class="element__title"></h2>
-              <button class="element__like-button hover hover_opacity_light" type="button" aria-label="Like button"></button>
-            </div>
-          </li> -->
+
         </ul>
       </section>
     </main>
@@ -46,9 +39,21 @@
     </footer>
   </div>
 
+  <div class="popup popup_type_preview">
+    <div class="popup__container popup__container_type_preview">
+      <button class="popup__close-button popup__close-button_type_preview hover hover_opacity_middle" type="button"
+        aria-label="Close"></button>
+      <figure>
+        <img src="" alt="image" class="popup__image-preview">
+        <figcaption class="popup__image-caption"></figcaption>
+      </figure>
+    </div>
+  </div>
+
   <div class="popup popup_type_profile">
     <div class="popup__container">
-      <button class="popup__close-button popup__close-button_type_profile hover hover_opacity_middle" type="button" aria-label="Close"></button>
+      <button class="popup__close-button popup__close-button_type_profile hover hover_opacity_middle" type="button"
+        aria-label="Close"></button>
 
       <h2 class="popup__title">Edit content</h2>
 
@@ -66,13 +71,15 @@
 
   <div class="popup popup_type_add-element">
     <div class="popup__container">
-      <button class="popup__close-button popup__close-button_type_add-element hover hover_opacity_middle" type="button" aria-label="Close"></button>
+      <button class="popup__close-button popup__close-button_type_add-element hover hover_opacity_middle" type="button"
+        aria-label="Close"></button>
 
       <h2 class="popup__title">New place</h2>
 
       <form class="popup__content popup__content_type_add-element" name="popup-content" action="#">
 
-        <input type="text" name="Place" id="place" class="popup__submit-text popup__submit-text_content_place" placeholder="Title" value="" />
+        <input type="text" name="Place" id="place" class="popup__submit-text popup__submit-text_content_place"
+          placeholder="Title" value="" />
 
         <input type="url" name="link" id="link" value="" placeholder="Image link"
           class="popup__submit-text popup__submit-text_content_link" />
@@ -87,7 +94,7 @@
     <li class="element">
       <button class="element__trash-button hover hover_opacity_middle" type="button"
         aria-label="Delete button"></button>
-      <img src="/" alt="" class="element__image" />
+      <img src="/" alt="image" class="element__image" />
       <div class="element__data">
         <h2 class="element__title"></h2>
         <button class="element__like-button hover hover_opacity_light" type="button" aria-label="Like button"></button>
