@@ -82,7 +82,7 @@ function submitProfileData(e) {
 /// /////////////////////
 
 const popupImage = document.querySelector('.popup__image-preview');
-const popupImageCaption = document.querySelector('.popup__image-caption');
+const popupImageCaption = document.querySelector('.popup__image-caption')
 // create card
 function createCard(name, link) {
   const newElement = elementTemplate.querySelector('.element').cloneNode(true);
@@ -93,8 +93,8 @@ function createCard(name, link) {
   const cardDeleteButton = newElement.querySelector('.element__trash-button');
   const cardImage = newElement.querySelector('.element__image');
 
-  cardLikeButton.addEventListener('click', () => {
-    const like = cardLikeButton.closest('.element__like-button');
+  cardLikeButton.addEventListener('click', (e) => {
+    const like = e.target;
     like.classList.toggle('element__like-button_state_active');
   });
 
@@ -104,10 +104,8 @@ function createCard(name, link) {
   });
 
   cardImage.addEventListener('click', () => {
-    console.log(popupImage);
     popupImage.src = link;
     popupImageCaption.textContent = name;
-    console.log(popupImageCaption.textContent);
     togglePopup(popupPreview);
   });
 

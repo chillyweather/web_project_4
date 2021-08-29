@@ -1,5 +1,6 @@
 .element__image {
   width: 100%;
-  min-height: calc(100% - 79px);
+  min-height: 281px;
+  max-height: 281px;
   border-radius: 10px 10px 0 0;
 }
