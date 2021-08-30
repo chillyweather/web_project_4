@@ -60,21 +60,42 @@ const elementsContainer = document.querySelector('.elements__container');
 // popup functions
 
 function openPopup(modalName) {
-  formAddElement.reset();
   modalName.classList.add('popup_opened');
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileAbout.textContent;
 }
 
-function togglePopup(modalName) {
-  modalName.classList.toggle('popup_opened');
+function closePopup(modalName) {
+  modalName.classList.remove('popup_opened');
+}
+
+// load info for specific forms
+function openForm(modalName) {
+  openPopup(modalName);
+  if (modalName === popupEditProfile) {
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileAbout.textContent;
+  } else {
+    formAddElement.reset();
+  }
 }
 
 function submitProfileData(e) {
   e.preventDefault();
   profileName.textContent = nameInput.value;
   profileAbout.textContent = jobInput.value;
-  togglePopup(popupEditProfile);
+  closePopup(popupEditProfile);
+}
+
+function submitElementData(e) {
+  e.preventDefault();
+  const newCard = {};
+  newCard.name = cardNameInput.value;
+  newCard.link = cardLinkInput.value;
+  elementsContainer.prepend(createCard(newCard));
+  closePopup(popupAddElement);
+}
+
+function toggleLikeButton(button) {
+  button.classList.toggle('element__like-button_state_active');
 }
 
 /// /////////////////////
@@ -82,62 +103,54 @@ function submitProfileData(e) {
 /// /////////////////////
 
 const popupImage = document.querySelector('.popup__image-preview');
-const popupImageCaption = document.querySelector('.popup__image-caption')
+const popupImageCaption = document.querySelector('.popup__image-caption');
+
 // create card
-function createCard(name, link) {
+function createCard(card) {
   const newElement = elementTemplate.querySelector('.element').cloneNode(true);
-  newElement.querySelector('.element__title').textContent = name;
-  newElement.querySelector('.element__image').src = link;
+  newElement.querySelector('.element__title').textContent = card.name;
+  newElement.querySelector('.element__image').src = card.link;
+  newElement.querySelector('.element__image').alt = `Picture of ${card.name}`;
 
   const cardLikeButton = newElement.querySelector('.element__like-button');
   const cardDeleteButton = newElement.querySelector('.element__trash-button');
   const cardImage = newElement.querySelector('.element__image');
 
-  cardLikeButton.addEventListener('click', (e) => {
-    const like = e.target;
-    like.classList.toggle('element__like-button_state_active');
-  });
+  cardLikeButton.addEventListener('click', (e) => toggleLikeButton(e.target));
 
   cardDeleteButton.addEventListener('click', () => {
-    const card = cardDeleteButton.closest('.element');
-    card.remove();
+    const cardElement = cardDeleteButton.closest('.element');
+    cardElement.remove();
   });
 
   cardImage.addEventListener('click', () => {
-    popupImage.src = link;
-    popupImageCaption.textContent = name;
-    togglePopup(popupPreview);
+    popupImage.src = card.link;
+    popupImage.alt = `Picture of ${card.name}`;
+    popupImageCaption.textContent = card.name;
+    openPopup(popupPreview);
   });
 
   return newElement;
 }
 
-function submitElementData(e) {
-  e.preventDefault();
-  elementsContainer.append(createCard(cardNameInput.value, cardLinkInput.value));
-  togglePopup(popupAddElement);
-}
 // iterate through array and append card
-initialCards.forEach((item) => elementsContainer.append(createCard(item.name, item.link)));
+initialCards.forEach((item) => elementsContainer.append(createCard(item)));
 
 /// ///////////////
 // event listeners
 /// ///////////////
 
 // edit profile
-profileEditButton.addEventListener('click', () => openPopup(popupEditProfile));
+profileEditButton.addEventListener('click', () => openForm(popupEditProfile));
 // add element card
-addElementButton.addEventListener('click', () => openPopup(popupAddElement));
-
-// image preview card
-// addElementButton.addEventListener('click', () => openPopup(popupAddElement));
+addElementButton.addEventListener('click', () => openForm(popupAddElement));
 
 // submit forms
 formEditProfile.addEventListener('submit', submitProfileData);
 formAddElement.addEventListener('submit', submitElementData);
 
 // close popups
-popupEditProfileCloseButton.addEventListener('click', () => togglePopup(popupEditProfile));
-popupAddElementCloseButton.addEventListener('click', () => togglePopup(popupAddElement));
+popupEditProfileCloseButton.addEventListener('click', () => closePopup(popupEditProfile));
+popupAddElementCloseButton.addEventListener('click', () => closePopup(popupAddElement));
 
-previewPopupCloseButton.addEventListener('click', () => togglePopup(popupPreview));
+previewPopupCloseButton.addEventListener('click', () => closePopup(popupPreview));
