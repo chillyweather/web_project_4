@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 // initial element cards
 const initialCards = [
   {
@@ -136,6 +137,16 @@ function submitElementData(e) {
   closePopup(popupAddElement);
 }
 
+//* validation input
+const input = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+
 // *form validation
 
 const showInputError = (formElement, inputElement, errorMessage) => {
@@ -160,29 +171,33 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-const hasInvalidInput = (inputList) => {
-  inputList.some((inputElement) => !inputElement.validity.valid);
-};
+const hasInvalidInput = (inputList) => inputList.some((inputElement) => !inputElement.validity.valid);
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add('popup__submit-button_type_inactive');
+    buttonElement.disabled = true;
+    // ? linter doesn't like it, but how else can i make button
+    // ? really disabled? not just look like...
   } else {
     buttonElement.classList.remove('popup__submit-button_type_inactive');
+    buttonElement.disabled = false;
   }
 }; // TODO 1
 
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.popup__submit-text'));
+
   const buttonElement = formElement.querySelector('.popup__submit-button');
 
-  toggleButtonState(inputList, buttonElement); // TODO 1
+  toggleButtonState(inputList, buttonElement);
+  console.log(buttonElement.classList);
+  console.log(buttonElement.classList);
 
   inputList.forEach((inputElement) => {
-    console.log(inputElement);
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement); // TODO 1
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
@@ -199,11 +214,6 @@ const enableValidation = () => {
 };
 
 enableValidation();
-
-// !TMP↓↓↓↓↓↓↓
-// const formInput = formEditProfile.querySelector('.popup__submit-text');
-// const formError = formEditProfile.querySelector(`#${formInput.id}-error`);
-// formError.textContent = formInput.validationMessage;
 
 // *event listeners
 
