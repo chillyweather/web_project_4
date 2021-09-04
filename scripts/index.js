@@ -138,9 +138,29 @@ function submitElementData(e) {
 
 // *form validation
 
-// const hasInvalidInput
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.add('popup__submit-text_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__submit-text-error_type_active');
+};
 
-// const checkInputValidity; //TODO 2
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.remove('popup__submit-text_type_error');
+  errorElement.classList.remove('popup__submit-text-error_type_active');
+  errorElement.textContent = '';
+};
+
+// const hasInvalidInput; //TODO 3
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+}; // TODO 2
 
 // const toggleButtonState; //TODO 1
 
@@ -153,7 +173,7 @@ const setEventListeners = (formElement) => {
   inputList.forEach((inputElement) => {
     console.log(inputElement);
     inputElement.addEventListener('input', () => {
-      // checkInputValidity(formElement, inputElement); // TODO 2
+      checkInputValidity(formElement, inputElement); // TODO 2
       // toggleButtonState(inputList, buttonElement); // TODO 1
     });
   });
