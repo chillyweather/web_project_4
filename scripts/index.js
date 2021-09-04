@@ -104,9 +104,9 @@ function createCard(card) {
   cardLikeButton.addEventListener('click', (e) => toggleLikeButton(e.target));
 
   cardDeleteButton.addEventListener('click', () => {
-    let cardElement = cardDeleteButton.closest('.element');
+    const cardElement = cardDeleteButton.closest('.element');
     cardElement.remove();
-    cardElement = null;
+    // cardElement = null;
   });
 
   cardImage.addEventListener('click', () => {
