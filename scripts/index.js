@@ -58,7 +58,6 @@ const elementTemplate = document.querySelector('#element-template').content;
 const elementsContainer = document.querySelector('.elements__container');
 
 // popup functions
-
 function openPopup(modalElement) {
   modalElement.classList.add('popup_opened');
 }
@@ -82,9 +81,7 @@ function toggleLikeButton(button) {
   button.classList.toggle('element__like-button_state_active');
 }
 
-/// /////////////////////
-// Initial cards creation
-/// /////////////////////
+// *Initial cards creation
 
 const popupImage = document.querySelector('.popup__image-preview');
 const popupImageCaption = document.querySelector('.popup__image-caption');
@@ -119,7 +116,10 @@ function createCard(card) {
   return newElement;
 }
 
-// submit form data
+// iterate through array and append card
+initialCards.forEach((item) => elementsContainer.append(createCard(item)));
+
+// submit form data //? replace with function?
 function submitProfileData(e) {
   e.preventDefault();
   profileName.textContent = nameInput.value;
@@ -136,12 +136,48 @@ function submitElementData(e) {
   closePopup(popupAddElement);
 }
 
-// iterate through array and append card
-initialCards.forEach((item) => elementsContainer.append(createCard(item)));
+// *form validation
 
-/// ///////////////
-// event listeners
-/// ///////////////
+// const hasInvalidInput
+
+// const checkInputValidity; //TODO 2
+
+// const toggleButtonState; //TODO 1
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__submit-text'));
+  const buttonElement = formElement.querySelector('.popup__submit-button');
+
+  // toggleButtonState(inputList, buttonElement); // TODO 1
+
+  inputList.forEach((inputElement) => {
+    console.log(inputElement);
+    inputElement.addEventListener('input', () => {
+      // checkInputValidity(formElement, inputElement); // TODO 2
+      // toggleButtonState(inputList, buttonElement); // TODO 1
+    });
+  });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.popup__content'));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (e) => { // TODO разобраться с сабмитами
+      e.preventDefault();
+    });
+
+    setEventListeners(formElement); // TODO change to setEventListeners!
+  });
+};
+
+enableValidation();
+
+// !TMP↓↓↓↓↓↓↓
+// const formInput = formEditProfile.querySelector('.popup__submit-text');
+// const formError = formEditProfile.querySelector(`#${formInput.id}-error`);
+// formError.textContent = formInput.validationMessage;
+
+// *event listeners
 
 // edit profile
 profileEditButton.addEventListener('click', () => openForm(popupEditProfile));

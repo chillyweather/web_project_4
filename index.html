@@ -86,27 +86,31 @@
         >
           <input
             type="text"
-            name="Name"
-            id="name"
+            name="name"
+            id="name-input"
             class="popup__submit-text popup__submit-text_content_name"
             value=""
             minlength="2"
             maxlength="40"
             required
           />
-          <span class="popup__submit-text-error">This field is required</span>
+          <span id="name-input-error" class="popup__submit-text-error"
+            >This field is required</span
+          >
 
           <input
             type="text"
-            name="about-me"
-            id="about-me"
+            name="about"
+            id="about-input"
             value=""
             class="popup__submit-text popup__submit-text_content_about"
             minlength="2"
             maxlength="200"
             required
           />
-          <span class="popup__submit-text-error">This field is required</span>
+          <span id="about-input-error" class="popup__submit-text-error"
+            >This field is required</span
+          >
           <button
             type="submit"
             class="popup__submit-button hover hover_opacity_dark"
@@ -138,8 +142,8 @@
         >
           <input
             type="text"
-            name="Place"
-            id="place"
+            name="place"
+            id="place-input"
             class="popup__submit-text popup__submit-text_content_place"
             placeholder="Title"
             value=""
@@ -147,18 +151,22 @@
             maxlength="30"
             required
           />
-          <span class="popup__submit-text-error">This field is required</span>
+          <span id="place-input-error" class="popup__submit-text-error"
+            >This field is required</span
+          >
 
           <input
             type="url"
             name="link"
-            id="link"
+            id="link-input"
             value=""
             placeholder="Image link"
             class="popup__submit-text popup__submit-text_content_link"
             required
           />
-          <span class="popup__submit-text-error">This field is required</span>
+          <span id="link-input-error" class="popup__submit-text-error"
+            >This field is required</span
+          >
           <button
             type="submit"
             class="popup__submit-button hover hover_opacity_dark"
