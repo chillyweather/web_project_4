@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 // initial element cards
 const initialCards = [
@@ -58,13 +59,32 @@ const formAddElement = popupAddElement.querySelector('.popup__content');
 const elementTemplate = document.querySelector('#element-template').content;
 const elementsContainer = document.querySelector('.elements__container');
 
+// TODO Popup and Escape listeners
+
+//* Set Escape handler
+const isEscEvent = (e, action) => {
+  const activePopup = document.querySelector('.popup_opened');
+
+  if (e.key === 'Escape') {
+    action(activePopup);
+  }
+};
+
+const handleEscUp = (e) => {
+  e.preventDefault();
+  // eslint-disable-next-line no-use-before-define
+  isEscEvent(e, closePopup);
+};
+
 // popup functions
 function openPopup(modalElement) {
   modalElement.classList.add('popup_opened');
+  document.addEventListener('keyup', handleEscUp);
 }
 
 function closePopup(modalElement) {
   modalElement.classList.remove('popup_opened');
+  document.removeEventListener('keyup', handleEscUp);
 }
 
 // load info for specific forms
@@ -138,14 +158,14 @@ function submitElementData(e) {
 }
 
 //* validation input
-const input = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-};
+// const input = {
+//   formSelector: '.popup__form',
+//   inputSelector: '.popup__input',
+//   submitButtonSelector: '.popup__button',
+//   inactiveButtonClass: 'popup__button_disabled',
+//   inputErrorClass: 'popup__input_type_error',
+//   errorClass: 'popup__error_visible',
+// };
 
 // *form validation
 
@@ -191,8 +211,6 @@ const setEventListeners = (formElement) => {
   const buttonElement = formElement.querySelector('.popup__submit-button');
 
   toggleButtonState(inputList, buttonElement);
-  console.log(buttonElement.classList);
-  console.log(buttonElement.classList);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
