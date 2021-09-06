@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const input = {
   formSelector: '.popup__content',
   inputSelector: '.popup__submit-text',
@@ -20,6 +21,16 @@ const hideInputError = (formElement, inputElement) => {
   errorElement.classList.remove(input.errorClass);
   errorElement.textContent = '';
 };
+// TODO reset validation //to try later
+// export default function resetValidation(e) {
+//   const thisForm = e.target.closest(input.formSelector);
+//   thisForm.forEach((inputElement) => {
+//     inputElement.classList.remove(input.inputErrorClass);
+//     const errorElement = thisForm.querySelector(`#${inputElement.id}-error`);
+//     errorElement.classList.remove(input.errorClass);
+//     errorElement.textContent = '';
+//   });
+// }
 
 const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {

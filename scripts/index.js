@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
+
 // initial element cards
 const initialCards = [
   {
@@ -59,7 +60,20 @@ const formAddElement = popupAddElement.querySelector('.popup__content');
 const elementTemplate = document.querySelector('#element-template').content;
 const elementsContainer = document.querySelector('.elements__container');
 
-// TODO Popup and Escape listeners
+// Set Escape handler
+const isOverlayClicked = (e, action) => {
+  const activePopup = document.querySelector('.popup_opened');
+
+  if (e.target === activePopup) {
+    action(activePopup);
+  }
+};
+
+// Close by click on overlay
+const handleOverlayClick = (e) => {
+  // eslint-disable-next-line no-use-before-define
+  isOverlayClicked(e, closePopup);
+};
 
 // Set Escape handler
 const isEscEvent = (e, action) => {
@@ -71,7 +85,6 @@ const isEscEvent = (e, action) => {
 };
 
 const handleEscUp = (e) => {
-  e.preventDefault();
   // eslint-disable-next-line no-use-before-define
   isEscEvent(e, closePopup);
 };
@@ -80,11 +93,13 @@ const handleEscUp = (e) => {
 function openPopup(modalElement) {
   modalElement.classList.add('popup_opened');
   document.addEventListener('keyup', handleEscUp);
+  document.addEventListener('click', handleOverlayClick);
 }
 
 function closePopup(modalElement) {
   modalElement.classList.remove('popup_opened');
   document.removeEventListener('keyup', handleEscUp);
+  document.removeEventListener('click', handleOverlayClick);
 }
 
 // load info for specific forms
@@ -140,7 +155,6 @@ function createCard(card) {
 // iterate through array and append card
 initialCards.forEach((item) => elementsContainer.append(createCard(item)));
 
-// submit form data //? replace with function?
 function submitProfileData(e) {
   e.preventDefault();
   profileName.textContent = nameInput.value;
@@ -156,71 +170,6 @@ function submitElementData(e) {
   elementsContainer.prepend(createCard(newCard));
   closePopup(popupAddElement);
 }
-
-// *form validation
-
-// const showInputError = (formElement, inputElement, errorMessage) => {
-//   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-//   inputElement.classList.add('popup__submit-text_type_error');
-//   errorElement.textContent = errorMessage;
-//   errorElement.classList.add('popup__submit-text-error_type_active');
-// };
-
-// const hideInputError = (formElement, inputElement) => {
-//   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-//   inputElement.classList.remove('popup__submit-text_type_error');
-//   errorElement.classList.remove('popup__submit-text-error_type_active');
-//   errorElement.textContent = '';
-// };
-
-// const checkInputValidity = (formElement, inputElement) => {
-//   if (!inputElement.validity.valid) {
-//     showInputError(formElement, inputElement, inputElement.validationMessage);
-//   } else {
-//     hideInputError(formElement, inputElement);
-//   }
-// };
-
-// const hasInvalidInput = (inputList) => inputList.some((inputElement) => !inputElement.validity.valid);
-
-// const toggleButtonState = (inputList, buttonElement) => {
-//   if (hasInvalidInput(inputList)) {
-//     buttonElement.classList.add('popup__submit-button_type_inactive');
-//     buttonElement.disabled = true;
-//     // ? linter doesn't like it, but how else can i make button
-//     // ? really disabled? not just look like...
-//   } else {
-//     buttonElement.classList.remove('popup__submit-button_type_inactive');
-//     buttonElement.disabled = false;
-//   }
-// };
-
-// const setEventListeners = (formElement) => {
-//   const inputList = Array.from(formElement.querySelectorAll('.popup__submit-text'));
-
-//   const buttonElement = formElement.querySelector('.popup__submit-button');
-
-//   toggleButtonState(inputList, buttonElement);
-
-//   inputList.forEach((inputElement) => {
-//     inputElement.addEventListener('input', () => {
-//       checkInputValidity(formElement, inputElement);
-//       toggleButtonState(inputList, buttonElement);
-//     });
-//   });
-// };
-
-// const enableValidation = () => {
-//   const formList = Array.from(document.querySelectorAll('.popup__content'));
-//   formList.forEach((formElement) => {
-//     formElement.addEventListener('submit', (e) => {
-//     });
-
-//     setEventListeners(formElement);
-//   });
-// };
-
-// enableValidation();
 
 // *event listeners
 
