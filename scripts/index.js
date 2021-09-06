@@ -185,5 +185,4 @@ formAddElement.addEventListener('submit', submitElementData);
 // close popups
 popupEditProfileCloseButton.addEventListener('click', () => closePopup(popupEditProfile));
 popupAddElementCloseButton.addEventListener('click', () => closePopup(popupAddElement));
-
 previewPopupCloseButton.addEventListener('click', () => closePopup(popupPreview));

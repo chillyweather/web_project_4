@@ -21,6 +21,7 @@ const hideInputError = (formElement, inputElement) => {
   errorElement.classList.remove(input.errorClass);
   errorElement.textContent = '';
 };
+
 // TODO reset validation //to try later
 // export default function resetValidation(e) {
 //   const thisForm = e.target.closest(input.formSelector);
