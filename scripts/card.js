@@ -58,8 +58,8 @@ class Card {
     this._element.querySelector('.element__like-button').addEventListener('click', (e) => this._toggleLikeButton(e.target));
 
     this._element.querySelector('.element__trash-button').addEventListener('click', () => {
-    const cardElement = this._element.querySelector('.element__trash-button').closest('.element');
-    cardElement.remove();
+      const cardElement = this._element.querySelector('.element__trash-button').closest('.element');
+      cardElement.remove();
     });
 
     this._element.querySelector('.element__image').addEventListener('click', () => {
@@ -80,7 +80,7 @@ class Card {
   }
 
   _toggleLikeButton(button) {
-  button.classList.toggle('element__like-button_state_active');
+    button.classList.toggle('element__like-button_state_active');
   }
 
   getView() {

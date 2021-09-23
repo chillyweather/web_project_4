@@ -5,7 +5,7 @@ class FormValidator {
   }
 
   _showInputError = (inputElement, errorMessage) => {
-    const { inputErrorClass, errorClass } = this.settings;
+    const { inputErrorClass, errorClass } = this._settings;
 
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(inputErrorClass);
@@ -14,7 +14,7 @@ class FormValidator {
   };
 
   _hideInputError = (inputElement) => {
-    const { inputErrorClass, errorClass } = this.settings;
+    const { inputErrorClass, errorClass } = this._settings;
 
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(inputErrorClass);
@@ -26,7 +26,7 @@ class FormValidator {
 
 
   _toggleButtonState = () => {
-    const { inactiveButtonClass } = this.settings;
+    const { inactiveButtonClass, submitButtonSelector } = this._settings;
     const buttonElement = this._formElement.querySelector(submitButtonSelector);
 
     if (this._hasInvalidInput()) {
@@ -39,6 +39,7 @@ class FormValidator {
   };
 
   _checkInputValidity = (inputElement) => {
+    console.log(inputElement.validity);
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
@@ -56,7 +57,7 @@ class FormValidator {
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._checkInputValidity(this._formElement, inputElement);
+        this._checkInputValidity(inputElement);
         this._toggleButtonState(this._inputList);
       });
     });
@@ -67,24 +68,9 @@ class FormValidator {
       e.preventDefault();
     });
 
-    this._setEventListeners(formElement);
+    this._setEventListeners(this._formElement);
 
   }
 }
 
 export default FormValidator;
-
-// const settings = {
-//   // formSelector: '.popup__content',
-//   inputSelector: '.popup__submit-text',
-//   submitButtonSelector: '.popup__submit-button',
-//   inactiveButtonClass: 'popup__submit-button_type_inactive',
-//   inputErrorClass: 'popup__submit-text_type_error',
-//   errorClass: 'popup__submit-text-error_type_active',
-// };
-
-// const editForm = document.querySelector('.popup__content');
-// const addCardForm = document.querySelector('.popup__content');
-
-// const editFormValidator = new FormValidator(settings, formElement);
-// const addElementFormValidator = new FormValidator(settings, formElement);

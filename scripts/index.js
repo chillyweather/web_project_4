@@ -2,6 +2,29 @@
 import Card from './card.js';
 import FormValidator from './FormValidator.js';
 
+//form config
+const settings = {
+  inputSelector: '.popup__submit-text',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_type_inactive',
+  inputErrorClass: 'popup__submit-text_type_error',
+  errorClass: 'popup__submit-text-error_type_active',
+};
+
+
+
+
+const editForm = document.querySelector('.popup__content_type_edit-profile');
+const addCardForm = document.querySelector('.popup__content_type_add-element');
+
+const editFormValidator = new FormValidator(settings, editForm);
+const addElementFormValidator = new FormValidator(settings, addCardForm);
+
+editFormValidator.enableValidation();
+addElementFormValidator.enableValidation();
+
+
+
 // initial element cards
 const initialCards = [
   {
