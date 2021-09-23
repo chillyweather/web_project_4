@@ -1,5 +1,6 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable max-len */
+
+import Card from './card.js';
+console.log(Card);
 
 // initial element cards
 const initialCards = [
@@ -116,44 +117,48 @@ function openForm(modalElement) {
 function toggleLikeButton(button) {
   button.classList.toggle('element__like-button_state_active');
 }
-
 // *Initial cards creation
 
-const popupImage = document.querySelector('.popup__image-preview');
-const popupImageCaption = document.querySelector('.popup__image-caption');
+
 
 // create card
-function createCard(card) {
-  const newElement = elementTemplate.querySelector('.element').cloneNode(true);
-  const cardImage = newElement.querySelector('.element__image');
+// function createCard(card) {
+//   const newElement = elementTemplate.querySelector('.element').cloneNode(true);
+//   const cardImage = newElement.querySelector('.element__image');
 
-  newElement.querySelector('.element__title').textContent = card.name;
-  cardImage.src = card.link;
-  cardImage.alt = `Picture of ${card.name}`;
+//   newElement.querySelector('.element__title').textContent = card.name;
+//   cardImage.src = card.link;
+//   cardImage.alt = `Picture of ${card.name}`;
 
-  const cardLikeButton = newElement.querySelector('.element__like-button');
-  const cardDeleteButton = newElement.querySelector('.element__trash-button');
+//   const cardLikeButton = newElement.querySelector('.element__like-button');
+//   const cardDeleteButton = newElement.querySelector('.element__trash-button');
 
-  cardLikeButton.addEventListener('click', (e) => toggleLikeButton(e.target));
+//   cardLikeButton.addEventListener('click', (e) => toggleLikeButton(e.target));
 
-  cardDeleteButton.addEventListener('click', () => {
-    const cardElement = cardDeleteButton.closest('.element');
-    cardElement.remove();
-    // cardElement = null;
-  });
+//   cardDeleteButton.addEventListener('click', () => {
+//     const cardElement = cardDeleteButton.closest('.element');
+//     cardElement.remove();
+//     // cardElement = null;
+//   });
 
-  cardImage.addEventListener('click', () => {
-    popupImage.src = card.link;
-    popupImage.alt = `Picture of ${card.name}`;
-    popupImageCaption.textContent = card.name;
-    openPopup(popupPreview);
-  });
+//   cardImage.addEventListener('click', () => {
+//     popupImage.src = card.link;
+//     popupImage.alt = `Picture of ${card.name}`;
+//     popupImageCaption.textContent = card.name;
+//     openPopup(popupPreview);
+//   });
 
-  return newElement;
-}
+//   return newElement;
+// }
 
 // iterate through array and append card
-initialCards.forEach((item) => elementsContainer.append(createCard(item)));
+// initialCards.forEach((item) => elementsContainer.append(createCard(item)));
+
+initialCards.forEach((item) => {
+  const newCard = new Card(item, '#element-template');
+  console.log(newCard.getView());
+  elementsContainer.append(newCard.getView());
+})
 
 function submitProfileData(e) {
   e.preventDefault();
@@ -164,10 +169,8 @@ function submitProfileData(e) {
 
 function submitElementData(e) {
   e.preventDefault();
-  const newCard = {};
-  newCard.name = cardNameInput.value;
-  newCard.link = cardLinkInput.value;
-  elementsContainer.prepend(createCard(newCard));
+  const newCard = new Card({name: cardNameInput.value, link: cardLinkInput.value}, '#element-template');
+  elementsContainer.prepend(newCard.getView());
   closePopup(popupAddElement);
 }
 
