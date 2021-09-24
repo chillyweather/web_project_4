@@ -1,9 +1,7 @@
-//#region TEMP duplicate of popup functionality / I see no other way for now...
+//#region popup functionality (probably temporary)
 
 // popups
-const popupEditProfile = document.querySelector('.popup_type_profile');
-const popupAddElement = document.querySelector('.popup_type_add-element');
-const popupPreview = document.querySelector('.popup_type_preview');
+export const popupPreview = document.querySelector('.popup_type_preview');
 
 const handleOverlayClick = (e) => {
   // eslint-disable-next-line no-use-before-define
@@ -15,7 +13,6 @@ const handleEscUp = (e) => {
   isEscEvent(e, closePopup);
 };
 
-
 // Set Escape handler
 export const isEscEvent = (e, action) => {
   const activePopup = document.querySelector('.popup_opened');
@@ -25,20 +22,20 @@ export const isEscEvent = (e, action) => {
   }
 };
 
-function openPopup(modalElement) {
+export function openPopup(modalElement) {
   modalElement.classList.add('popup_opened');
   document.addEventListener('keyup', handleEscUp);
   document.addEventListener('click', handleOverlayClick);
 }
 
-function closePopup(modalElement) {
+export function closePopup(modalElement) {
   modalElement.classList.remove('popup_opened');
   document.removeEventListener('keyup', handleEscUp);
   document.removeEventListener('click', handleOverlayClick);
 }
 
 // Set Escape handler
-const isOverlayClicked = (e, action) => {
+export const isOverlayClicked = (e, action) => {
   const activePopup = document.querySelector('.popup_opened');
 
   if (e.target === activePopup) {

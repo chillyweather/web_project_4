@@ -1,5 +1,6 @@
 
 import Card from './card.js';
+import { openPopup, closePopup, popupPreview } from './card.js';
 import FormValidator from './FormValidator.js';
 
 //form config
@@ -12,8 +13,6 @@ const settings = {
 };
 
 
-
-
 const editForm = document.querySelector('.popup__content_type_edit-profile');
 const addCardForm = document.querySelector('.popup__content_type_add-element');
 
@@ -22,8 +21,6 @@ const addElementFormValidator = new FormValidator(settings, addCardForm);
 
 editFormValidator.enableValidation();
 addElementFormValidator.enableValidation();
-
-
 
 // initial element cards
 const initialCards = [
@@ -60,7 +57,6 @@ const addElementButton = document.querySelector('.profile__add-button');
 // popups
 const popupEditProfile = document.querySelector('.popup_type_profile');
 const popupAddElement = document.querySelector('.popup_type_add-element');
-const popupPreview = document.querySelector('.popup_type_preview');
 
 // close popup buttons
 const popupEditProfileCloseButton = popupEditProfile.querySelector('.popup__close-button_type_profile');
@@ -83,48 +79,6 @@ const formAddElement = popupAddElement.querySelector('.popup__content');
 
 const elementTemplate = document.querySelector('#element-template').content;
 const elementsContainer = document.querySelector('.elements__container');
-
-// Set Escape handler
-const isOverlayClicked = (e, action) => {
-  const activePopup = document.querySelector('.popup_opened');
-
-  if (e.target === activePopup) {
-    action(activePopup);
-  }
-};
-
-// Close by click on overlay
-const handleOverlayClick = (e) => {
-  // eslint-disable-next-line no-use-before-define
-  isOverlayClicked(e, closePopup);
-};
-
-// Set Escape handler
-export const isEscEvent = (e, action) => {
-  const activePopup = document.querySelector('.popup_opened');
-
-  if (e.key === 'Escape') {
-    action(activePopup);
-  }
-};
-
-const handleEscUp = (e) => {
-  // eslint-disable-next-line no-use-before-define
-  isEscEvent(e, closePopup);
-};
-
-// popup functions
-function openPopup(modalElement) {
-  modalElement.classList.add('popup_opened');
-  document.addEventListener('keyup', handleEscUp);
-  document.addEventListener('click', handleOverlayClick);
-}
-
-function closePopup(modalElement) {
-  modalElement.classList.remove('popup_opened');
-  document.removeEventListener('keyup', handleEscUp);
-  document.removeEventListener('click', handleOverlayClick);
-}
 
 // load info for specific forms
 function openForm(modalElement) {
