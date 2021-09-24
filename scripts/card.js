@@ -1,17 +1,9 @@
 //#region TEMP duplicate of popup functionality / I see no other way for now...
-// open popup buttons
-const profileEditButton = document.querySelector('.profile__edit-button');
-const addElementButton = document.querySelector('.profile__add-button');
 
 // popups
 const popupEditProfile = document.querySelector('.popup_type_profile');
 const popupAddElement = document.querySelector('.popup_type_add-element');
 const popupPreview = document.querySelector('.popup_type_preview');
-
-// close popup buttons
-const popupEditProfileCloseButton = popupEditProfile.querySelector('.popup__close-button_type_profile');
-const popupAddElementCloseButton = popupAddElement.querySelector('.popup__close-button_type_add-element');
-const previewPopupCloseButton = popupPreview.querySelector('.popup__close-button_type_preview')
 
 const handleOverlayClick = (e) => {
   // eslint-disable-next-line no-use-before-define
@@ -21,6 +13,16 @@ const handleOverlayClick = (e) => {
 const handleEscUp = (e) => {
   // eslint-disable-next-line no-use-before-define
   isEscEvent(e, closePopup);
+};
+
+
+// Set Escape handler
+export const isEscEvent = (e, action) => {
+  const activePopup = document.querySelector('.popup_opened');
+
+  if (e.key === 'Escape') {
+    action(activePopup);
+  }
 };
 
 function openPopup(modalElement) {

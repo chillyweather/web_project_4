@@ -39,7 +39,6 @@ class FormValidator {
   };
 
   _checkInputValidity = (inputElement) => {
-    console.log(inputElement.validity);
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement, inputElement.validationMessage);
     } else {
@@ -70,6 +69,13 @@ class FormValidator {
 
     this._setEventListeners(this._formElement);
 
+  }
+
+  resetValidation() {
+    this._inputList.forEach(((input) => {
+      this._hideInputError(input);
+    }))
+    this._toggleButtonState(this._inputList);
   }
 }
 

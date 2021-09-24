@@ -100,7 +100,7 @@ const handleOverlayClick = (e) => {
 };
 
 // Set Escape handler
-const isEscEvent = (e, action) => {
+export const isEscEvent = (e, action) => {
   const activePopup = document.querySelector('.popup_opened');
 
   if (e.key === 'Escape') {
@@ -132,8 +132,10 @@ function openForm(modalElement) {
   if (modalElement === popupEditProfile) {
     nameInput.value = profileName.textContent;
     jobInput.value = profileAbout.textContent;
+    editFormValidator.resetValidation(formEditProfile);
   } else {
     formAddElement.reset();
+    addElementFormValidator.resetValidation(formAddElement);
   }
 }
 
@@ -177,3 +179,4 @@ formAddElement.addEventListener('submit', submitElementData);
 popupEditProfileCloseButton.addEventListener('click', () => closePopup(popupEditProfile));
 popupAddElementCloseButton.addEventListener('click', () => closePopup(popupAddElement));
 previewPopupCloseButton.addEventListener('click', () => closePopup(popupPreview));
+
