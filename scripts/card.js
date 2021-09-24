@@ -1,6 +1,5 @@
 //#region popup functionality (probably temporary)
 
-// popups
 export const popupPreview = document.querySelector('.popup_type_preview');
 
 const handleOverlayClick = (e) => {
