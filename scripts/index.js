@@ -12,16 +12,6 @@ const settings = {
   errorClass: 'popup__submit-text-error_type_active',
 };
 
-
-const editForm = document.querySelector('.popup__content_type_edit-profile');
-const addCardForm = document.querySelector('.popup__content_type_add-element');
-
-const editFormValidator = new FormValidator(settings, editForm);
-const addElementFormValidator = new FormValidator(settings, addCardForm);
-
-editFormValidator.enableValidation();
-addElementFormValidator.enableValidation();
-
 // initial element cards
 const initialCards = [
   {
@@ -49,6 +39,16 @@ const initialCards = [
     link: 'https://code.s3.yandex.net/web-code/lago.jpg',
   },
 ];
+
+const editForm = document.querySelector('.popup__content_type_edit-profile');
+const addCardForm = document.querySelector('.popup__content_type_add-element');
+
+//form validation
+const editFormValidator = new FormValidator(settings, editForm);
+const addElementFormValidator = new FormValidator(settings, addCardForm);
+
+editFormValidator.enableValidation();
+addElementFormValidator.enableValidation();
 
 // open popup buttons
 const profileEditButton = document.querySelector('.profile__edit-button');

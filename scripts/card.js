@@ -1,5 +1,10 @@
 //#region popup functionality (probably temporary)
 
+//I guess, i'm doing something wrong, but when I move all these functions
+// to index.js I always get an error "cannot access Card before initialization"
+// on createCard function.
+// and I don't know how to initialize class before functions...
+
 export const popupPreview = document.querySelector('.popup_type_preview');
 
 const popupImage = document.querySelector('.popup__image-preview');
@@ -35,10 +40,7 @@ export function closePopup(modalElement) {
   document.removeEventListener('click', handleOverlayClick);
 }
 
-// Set Escape handler
 export const isOverlayClicked = (e, action) => {
-  // const activePopup = document.querySelector('.popup_opened');
-
   if (e.target.classList.contains('popup_opened')) {
     action(e.target);
   }
