@@ -1,6 +1,8 @@
 //#region popup functionality (probably temporary)
 
 export const popupPreview = document.querySelector('.popup_type_preview');
+const popupImage = document.querySelector('.popup__image-preview');
+const popupImageCaption = document.querySelector('.popup__image-caption');
 
 const handleOverlayClick = (e) => {
   // eslint-disable-next-line no-use-before-define
@@ -14,9 +16,8 @@ const handleEscUp = (e) => {
 
 // Set Escape handler
 export const isEscEvent = (e, action) => {
-  const activePopup = document.querySelector('.popup_opened');
-
   if (e.key === 'Escape') {
+    const activePopup = document.querySelector('.popup_opened');
     action(activePopup);
   }
 };
@@ -35,10 +36,10 @@ export function closePopup(modalElement) {
 
 // Set Escape handler
 export const isOverlayClicked = (e, action) => {
-  const activePopup = document.querySelector('.popup_opened');
+  // const activePopup = document.querySelector('.popup_opened');
 
-  if (e.target === activePopup) {
-    action(activePopup);
+  if (e.target.classList.contains('popup_opened')) {
+    action(e.target);
   }
 };
 //#endregion
@@ -52,17 +53,13 @@ class Card {
   }
 
   _setEventListeners() {
-    //todo -- separate callbacks?
     this._element.querySelector('.element__like-button').addEventListener('click', (e) => this._toggleLikeButton(e.target));
 
     this._element.querySelector('.element__trash-button').addEventListener('click', () => {
-      const cardElement = this._element.querySelector('.element__trash-button').closest('.element');
-      cardElement.remove();
+      this._element.remove();
     });
 
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      const popupImage = document.querySelector('.popup__image-preview');
-      const popupImageCaption = document.querySelector('.popup__image-caption');
       popupImage.src = this._link;
       popupImage.alt = `Picture of ${this._name}`;
       popupImageCaption.textContent = this._name;
@@ -85,6 +82,7 @@ class Card {
     this._element = this._getTemplate();
 
     this._element.querySelector('.element__image').src = this._link;
+    this._element.querySelector('.element__image').alt = this._name;
     this._element.querySelector('.element__title').textContent = this._name;
 
     this._setEventListeners();

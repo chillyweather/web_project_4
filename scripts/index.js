@@ -1,6 +1,6 @@
 
-import Card from './card.js';
-import { openPopup, closePopup, popupPreview } from './card.js';
+import Card from './Card.js';
+import { openPopup, closePopup, popupPreview } from './Card.js';
 import FormValidator from './FormValidator.js';
 
 //form config
@@ -81,27 +81,28 @@ const elementTemplate = document.querySelector('#element-template').content;
 const elementsContainer = document.querySelector('.elements__container');
 
 // load info for specific forms
-function openForm(modalElement) {
+function openEditProfileForm(modalElement) {
   openPopup(modalElement);
-  if (modalElement === popupEditProfile) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileAbout.textContent;
-    editFormValidator.resetValidation(formEditProfile);
-  } else {
-    formAddElement.reset();
-    addElementFormValidator.resetValidation(formAddElement);
-  }
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileAbout.textContent;
+  editFormValidator.resetValidation(formEditProfile);
 }
 
-function toggleLikeButton(button) {
-  button.classList.toggle('element__like-button_state_active');
+function openAddElementForm(modalElement) {
+  openPopup(modalElement);
+  formAddElement.reset();
+  addElementFormValidator.resetValidation(formAddElement);
 }
+
 // *Initial cards creation
 
+function createCard(data, templateElement) {
+  const newCard = new Card(data, templateElement).getView();
+  return newCard;
+}
+
 initialCards.forEach((item) => {
-  const newCard = new Card(item, '#element-template');
-  console.log(newCard.getView());
-  elementsContainer.append(newCard.getView());
+  elementsContainer.append(createCard(item, '#element-template'));
 })
 
 function submitProfileData(e) {
@@ -113,17 +114,16 @@ function submitProfileData(e) {
 
 function submitElementData(e) {
   e.preventDefault();
-  const newCard = new Card({ name: cardNameInput.value, link: cardLinkInput.value }, '#element-template');
-  elementsContainer.prepend(newCard.getView());
+  elementsContainer.prepend(createCard({ name: cardNameInput.value, link: cardLinkInput.value }, '#element-template'));
   closePopup(popupAddElement);
 }
 
 // *event listeners
 
 // edit profile
-profileEditButton.addEventListener('click', () => openForm(popupEditProfile));
+profileEditButton.addEventListener('click', () => openEditProfileForm(popupEditProfile));
 // add element card
-addElementButton.addEventListener('click', () => openForm(popupAddElement));
+addElementButton.addEventListener('click', () => openAddElementForm(popupAddElement));
 
 // submit forms
 formEditProfile.addEventListener('submit', submitProfileData);
