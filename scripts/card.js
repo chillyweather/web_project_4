@@ -1,6 +1,7 @@
 //#region popup functionality (probably temporary)
 
 export const popupPreview = document.querySelector('.popup_type_preview');
+
 const popupImage = document.querySelector('.popup__image-preview');
 const popupImageCaption = document.querySelector('.popup__image-caption');
 
