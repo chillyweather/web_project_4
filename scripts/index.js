@@ -85,13 +85,13 @@ function openEditProfileForm(modalElement) {
   openPopup(modalElement);
   nameInput.value = profileName.textContent;
   jobInput.value = profileAbout.textContent;
-  editFormValidator.resetValidation(formEditProfile);
+  editFormValidator.resetValidation();
 }
 
 function openAddElementForm(modalElement) {
   openPopup(modalElement);
   formAddElement.reset();
-  addElementFormValidator.resetValidation(formAddElement);
+  addElementFormValidator.resetValidation();
 }
 
 // *Initial cards creation
