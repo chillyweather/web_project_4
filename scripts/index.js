@@ -1,44 +1,36 @@
 
 import Card from './Card.js';
+import Section from '../components/Section.js';
+import {
+  settings,
+  initialCards,
+  cardsContainer
+} from '../utils/constants.js';
+
 import { openPopup, closePopup, popupPreview } from './Card.js';
 import FormValidator from './FormValidator.js';
 
-//form config
-const settings = {
-  inputSelector: '.popup__submit-text',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_type_inactive',
-  inputErrorClass: 'popup__submit-text_type_error',
-  errorClass: 'popup__submit-text-error_type_active',
-};
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const cardElement = new Card(item, '#element-template').getView();
+    cardList.addItem(cardElement);
+  }
+}, cardsContainer);
 
-// initial element cards
-const initialCards = [
-  {
-    name: 'Yosemite Valley',
-    link: 'https://images.unsplash.com/photo-1583207804784-198ba4353030?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-  },
-  {
-    name: 'Lake Louise',
-    link: 'https://code.s3.yandex.net/web-code/lake-louise.jpg',
-  },
-  {
-    name: 'Bald Mountains',
-    link: 'https://code.s3.yandex.net/web-code/bald-mountains.jpg',
-  },
-  {
-    name: 'Latemar',
-    link: 'https://code.s3.yandex.net/web-code/latemar.jpg',
-  },
-  {
-    name: 'Vanoise National Park',
-    link: 'https://code.s3.yandex.net/web-code/vanoise.jpg',
-  },
-  {
-    name: 'Lago di Braies',
-    link: 'https://code.s3.yandex.net/web-code/lago.jpg',
-  },
-];
+//* ------------------------------------------------------------//
+//! *Initial cards creation
+
+function createCard(data, templateElement) {
+  const newCard = new Card(data, templateElement).getView();
+  return newCard;
+}
+
+// initialCards.forEach((item) => {
+//   elementsContainer.append(createCard(item, '#element-template'));
+// })
+export const elementsContainer = document.querySelector('.elements__container');
+//!
 
 const editForm = document.querySelector('.popup__content_type_edit-profile');
 const addCardForm = document.querySelector('.popup__content_type_add-element');
@@ -78,7 +70,7 @@ const formEditProfile = popupEditProfile.querySelector('.popup__content');
 const formAddElement = popupAddElement.querySelector('.popup__content');
 
 const elementTemplate = document.querySelector('#element-template').content;
-const elementsContainer = document.querySelector('.elements__container');
+
 
 // load info for specific forms
 function openEditProfileForm(modalElement) {
@@ -94,16 +86,6 @@ function openAddElementForm(modalElement) {
   addElementFormValidator.resetValidation();
 }
 
-// *Initial cards creation
-
-function createCard(data, templateElement) {
-  const newCard = new Card(data, templateElement).getView();
-  return newCard;
-}
-
-initialCards.forEach((item) => {
-  elementsContainer.append(createCard(item, '#element-template'));
-})
 
 function submitProfileData(e) {
   e.preventDefault();
@@ -133,3 +115,5 @@ formAddElement.addEventListener('submit', submitElementData);
 popupEditProfileCloseButton.addEventListener('click', () => closePopup(popupEditProfile));
 popupAddElementCloseButton.addEventListener('click', () => closePopup(popupAddElement));
 previewPopupCloseButton.addEventListener('click', () => closePopup(popupPreview));
+//* --------------------------------------------------------//
+cardList.renderItems()
