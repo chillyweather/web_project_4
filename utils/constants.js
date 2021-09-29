@@ -37,4 +37,24 @@ export const initialCards = [
 
 //initial cards container
 export const cardsContainer = '.elements__container';
-export const elementsContainer = document.querySelector('.elements__container');
+
+//image popup picture and caption
+export const popupPreview = document.querySelector('.popup_type_preview');
+export const popupImage = document.querySelector('.popup__image-preview');
+export const popupImageCaption = document.querySelector('.popup__image-caption');
+
+
+
+
+
+
+
+
+
+
+// export const isEscEvent = (e, action) => {
+//   if (e.key === 'Escape') {
+//     const activePopup = document.querySelector('.popup_opened');
+//     action(activePopup);
+//   }
+// };

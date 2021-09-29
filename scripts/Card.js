@@ -1,10 +1,6 @@
 //#region popup functionality (probably temporary)
-
-//I guess, i'm doing something wrong, but when I move all these functions
-// to index.js I always get an error "cannot access Card before initialization"
-// on createCard function.
-// and I don't know how to initialize class before functions...
-
+// import Popup from '../components/Popup';
+//!
 export const popupPreview = document.querySelector('.popup_type_preview');
 
 const popupImage = document.querySelector('.popup__image-preview');
@@ -39,6 +35,7 @@ export function closePopup(modalElement) {
   document.removeEventListener('keyup', handleEscUp);
   document.removeEventListener('click', handleOverlayClick);
 }
+//!
 
 export const isOverlayClicked = (e, action) => {
   if (e.target.classList.contains('popup_opened')) {
@@ -62,12 +59,13 @@ class Card {
       this._element.remove();
     });
 
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      popupImage.src = this._link;
-      popupImage.alt = `Picture of ${this._name}`;
-      popupImageCaption.textContent = this._name;
-      openPopup(popupPreview);
-    });
+    //TODO move to create card function...
+    // this._element.querySelector('.element__image').addEventListener('click', () => {
+    //   popupImage.src = this._link;
+    //   popupImage.alt = `Picture of ${this._name}`;
+    //   popupImageCaption.textContent = this._name;
+    //   openPopup(popupPreview);
+    // });
   }
 
   _getTemplate() {
@@ -92,5 +90,7 @@ class Card {
     return this._element;
   }
 }
+
+
 
 export default Card;
