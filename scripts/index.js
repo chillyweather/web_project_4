@@ -26,7 +26,7 @@ const editFormValidator = new FormValidator(settings, editForm);
 const addElementFormValidator = new FormValidator(settings, addCardForm);
 
 //create card instance
-export function createCard(data, templateElement) {
+function createCard(data, templateElement) {
   const newCard = new Card(data, templateElement).getView();
   newCard.querySelector('.element__image').addEventListener('click', () => {
     newPopupWithImage.open(data);
@@ -37,6 +37,7 @@ export function createCard(data, templateElement) {
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
+    console.log(item);
     const cardElement = createCard(item, '#element-template');
     cardList.addItem(cardElement);
   }
@@ -47,24 +48,29 @@ const newPopupWithImage = new PopupWithImage('.popup_type_preview')
 
 
 const editProfileModal = new PopupWithForm('.popup_type_profile', (data) => {
-  // e.preventDefault();
-  console.log(data.name);
   profileName.textContent = data.name;
-  console.log(data.about);
   profileAbout.textContent = data.about;
 
 })
 
-// console.log(editProfileModal._getInputValues())
-
-// edit profile
 profileEditButton.addEventListener('click', () => {
   editProfileModal.open();
-  // editProfileModal.setEventListeners();
 });
 //* -----------------------------------------------------------
 
-editProfileModal.setEventListeners()
+const addElementModal = new PopupWithForm('.popup_type_add-element', (data) => {
+  const newCard = createCard(data, '#element-template');
+  console.log(newCard);
+  cardList.addItem(newCard);
+})
+
+
+
+addElementButton.addEventListener('click', () => addElementModal.open());
+//* -----------------------------------------------------------
+
+editProfileModal.setEventListeners();
+addElementModal.setEventListeners();
 
 
 //* ------------------------------------------------------------
@@ -83,8 +89,8 @@ const popupEditProfile = document.querySelector('.popup_type_profile');
 const popupAddElement = document.querySelector('.popup_type_add-element');
 
 // close popup buttons
-const popupEditProfileCloseButton = popupEditProfile.querySelector('.popup__close-button_type_profile');
-const popupAddElementCloseButton = popupAddElement.querySelector('.popup__close-button_type_add-element');
+// const popupEditProfileCloseButton = popupEditProfile.querySelector('.popup__close-button_type_profile');
+// const popupAddElementCloseButton = popupAddElement.querySelector('.popup__close-button_type_add-element');
 // const previewPopupCloseButton = popupPreview.querySelector('.popup__close-button_type_preview');
 
 // form inputs
@@ -135,15 +141,14 @@ function submitElementData(e) {
 // profileEditButton.addEventListener('click', () => editProfileModal.open());
 // profileEditButton.addEventListener('click', () => openEditProfileForm(popupEditProfile));
 // add element card
-addElementButton.addEventListener('click', () => openAddElementForm(popupAddElement));
 
 // submit forms
 // formEditProfile.addEventListener('submit', submitProfileData);
-formAddElement.addEventListener('submit', submitElementData);
+// formAddElement.addEventListener('submit', submitElementData);
 
 // close popups
 // popupEditProfileCloseButton.addEventListener('click', () => closePopup(popupEditProfile));
-popupAddElementCloseButton.addEventListener('click', () => closePopup(popupAddElement));
+// popupAddElementCloseButton.addEventListener('click', () => closePopup(popupAddElement));
 
 
 // previewPopupCloseButton.addEventListener('click', () => closePopup(popupPreview));

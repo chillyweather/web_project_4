@@ -3,44 +3,44 @@
 //!
 export const popupPreview = document.querySelector('.popup_type_preview');
 
-const popupImage = document.querySelector('.popup__image-preview');
-const popupImageCaption = document.querySelector('.popup__image-caption');
+// const popupImage = document.querySelector('.popup__image-preview');
+// const popupImageCaption = document.querySelector('.popup__image-caption');
 
-const handleOverlayClick = (e) => {
-  // eslint-disable-next-line no-use-before-define
-  isOverlayClicked(e, closePopup);
-};
+// const handleOverlayClick = (e) => {
+//   // eslint-disable-next-line no-use-before-define
+//   isOverlayClicked(e, closePopup);
+// };
 
-const handleEscUp = (e) => {
-  // eslint-disable-next-line no-use-before-define
-  isEscEvent(e, closePopup);
-};
+// const handleEscUp = (e) => {
+//   // eslint-disable-next-line no-use-before-define
+//   isEscEvent(e, closePopup);
+// };
 
-// Set Escape handler
-export const isEscEvent = (e, action) => {
-  if (e.key === 'Escape') {
-    const activePopup = document.querySelector('.popup_opened');
-    action(activePopup);
-  }
-};
+// // Set Escape handler
+// export const isEscEvent = (e, action) => {
+//   if (e.key === 'Escape') {
+//     const activePopup = document.querySelector('.popup_opened');
+//     action(activePopup);
+//   }
+// };
 
-export function openPopup(modalElement) {
-  modalElement.classList.add('popup_opened');
-  document.addEventListener('keyup', handleEscUp);
-  document.addEventListener('click', handleOverlayClick);
-}
+// export function openPopup(modalElement) {
+//   modalElement.classList.add('popup_opened');
+//   document.addEventListener('keyup', handleEscUp);
+//   document.addEventListener('click', handleOverlayClick);
+// }
 
-export function closePopup(modalElement) {
-  modalElement.classList.remove('popup_opened');
-  document.removeEventListener('keyup', handleEscUp);
-  document.removeEventListener('click', handleOverlayClick);
-}
+// export function closePopup(modalElement) {
+//   modalElement.classList.remove('popup_opened');
+//   document.removeEventListener('keyup', handleEscUp);
+//   document.removeEventListener('click', handleOverlayClick);
+// }
 
-export const isOverlayClicked = (e, action) => {
-  if (e.target.classList.contains('popup_opened')) {
-    action(e.target);
-  }
-};
+// export const isOverlayClicked = (e, action) => {
+//   if (e.target.classList.contains('popup_opened')) {
+//     action(e.target);
+//   }
+// };
 //#endregion
 
 class Card {
