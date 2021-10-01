@@ -3,13 +3,13 @@ export default class Popup {
     this._popupElement = document.querySelector(popupSelector);
   }
 
-  openPopup() {
+  open() {
     this._popupElement.classList.add('popup_opened');
     document.addEventListener('keyup', this._handleEscClose);
     document.addEventListener('click', this._handleOverlayClick);
   }
 
-  closePopup() {
+  close() {
     this._popupElement.classList.remove('popup_opened');
     document.removeEventListener('keyup', this._handleEscClose);
     document.removeEventListener('click', this._handleOverlayClick);
@@ -17,20 +17,20 @@ export default class Popup {
 
   _handleOverlayClick = (e) => {
     if (e.target.classList.contains('popup_opened')) {
-      this.closePopup(e.target);
+      this.close(e.target);
     }
   };
 
   _handleEscClose = (e) => {
     if (e.key === 'Escape') {
-      this.closePopup(e);
+      this.close(e);
     }
   };
 
   setEventListeners = () => {
     this._popupElement.querySelector('.popup__close-button').addEventListener(
       'click', () => {
-        this.closePopup();
+        this.close();
       }
     )
   }

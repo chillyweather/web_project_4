@@ -35,7 +35,6 @@ export function closePopup(modalElement) {
   document.removeEventListener('keyup', handleEscUp);
   document.removeEventListener('click', handleOverlayClick);
 }
-//!
 
 export const isOverlayClicked = (e, action) => {
   if (e.target.classList.contains('popup_opened')) {
@@ -59,13 +58,6 @@ class Card {
       this._element.remove();
     });
 
-    //TODO move to create card function...
-    // this._element.querySelector('.element__image').addEventListener('click', () => {
-    //   popupImage.src = this._link;
-    //   popupImage.alt = `Picture of ${this._name}`;
-    //   popupImageCaption.textContent = this._name;
-    //   openPopup(popupPreview);
-    // });
   }
 
   _getTemplate() {
