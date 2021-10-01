@@ -1,5 +1,6 @@
 
 import FormValidator from '../components/FormValidator.js';
+import UserInfo from '../components/UserInfo.js';
 import Card from './Card.js';
 import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -34,10 +35,19 @@ function createCard(data, templateElement) {
   return newCard;
 }
 
+//*UserInfo---------------------------------------------------
+
+const userInfo = new UserInfo({
+  userNameSelector: '.profile__name',
+  userJobSelector: '.profile__about'
+});
+
+console.log(userInfo.getUserInfo())
+//*-----------------------------------------------------------
+
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    console.log(item);
     const cardElement = createCard(item, '#element-template');
     cardList.addItem(cardElement);
   }
@@ -48,7 +58,7 @@ const newPopupWithImage = new PopupWithImage('.popup_type_preview')
 
 
 const editProfileModal = new PopupWithForm('.popup_type_profile', (data) => {
-  profileName.textContent = data.name;
+  userInfo = data.name;
   profileAbout.textContent = data.about;
 
 })
@@ -60,7 +70,6 @@ profileEditButton.addEventListener('click', () => {
 
 const addElementModal = new PopupWithForm('.popup_type_add-element', (data) => {
   const newCard = createCard(data, '#element-template');
-  console.log(newCard);
   cardList.addItem(newCard);
 })
 
