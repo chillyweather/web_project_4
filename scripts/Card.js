@@ -1,54 +1,10 @@
-//#region popup functionality (probably temporary)
-// import Popup from '../components/Popup';
-//!
-export const popupPreview = document.querySelector('.popup_type_preview');
-
-// const popupImage = document.querySelector('.popup__image-preview');
-// const popupImageCaption = document.querySelector('.popup__image-caption');
-
-// const handleOverlayClick = (e) => {
-//   // eslint-disable-next-line no-use-before-define
-//   isOverlayClicked(e, closePopup);
-// };
-
-// const handleEscUp = (e) => {
-//   // eslint-disable-next-line no-use-before-define
-//   isEscEvent(e, closePopup);
-// };
-
-// // Set Escape handler
-// export const isEscEvent = (e, action) => {
-//   if (e.key === 'Escape') {
-//     const activePopup = document.querySelector('.popup_opened');
-//     action(activePopup);
-//   }
-// };
-
-// export function openPopup(modalElement) {
-//   modalElement.classList.add('popup_opened');
-//   document.addEventListener('keyup', handleEscUp);
-//   document.addEventListener('click', handleOverlayClick);
-// }
-
-// export function closePopup(modalElement) {
-//   modalElement.classList.remove('popup_opened');
-//   document.removeEventListener('keyup', handleEscUp);
-//   document.removeEventListener('click', handleOverlayClick);
-// }
-
-// export const isOverlayClicked = (e, action) => {
-//   if (e.target.classList.contains('popup_opened')) {
-//     action(e.target);
-//   }
-// };
-//#endregion
-
 class Card {
-  constructor(data, elementSelector) {
+  constructor(data, elementSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
 
     this._elementSelector = elementSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
@@ -56,6 +12,10 @@ class Card {
 
     this._element.querySelector('.element__trash-button').addEventListener('click', () => {
       this._element.remove();
+    });
+
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      this._handleCardClick();
     });
 
   }

@@ -35,6 +35,14 @@ export const initialCards = [
   },
 ];
 
+//form elements
+export const editForm = document.querySelector('.popup__content_type_edit-profile');
+export const addCardForm = document.querySelector('.popup__content_type_add-element');
+
+//default profile data
+export const nameInput = document.querySelector('.popup__submit-text_content_name');
+export const jobInput = document.querySelector('.popup__submit-text_content_about');
+
 //initial cards container
 export const cardsContainer = '.elements__container';
 
