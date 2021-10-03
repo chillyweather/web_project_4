@@ -17,17 +17,17 @@ export default class Popup {
 
   _handleOverlayClick = (e) => {
     if (e.target.classList.contains('popup_opened')) {
-      this.close(e.target);
+      this.close();
     }
   };
 
   _handleEscClose = (e) => {
     if (e.key === 'Escape') {
-      this.close(e);
+      this.close();
     }
   };
 
-  setEventListeners = () => {
+  setEventListeners() {
     this._popupElement.querySelector('.popup__close-button').addEventListener(
       'click', () => {
         this.close();

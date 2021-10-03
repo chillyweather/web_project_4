@@ -55,18 +55,3 @@ export const popupImageCaption = document.querySelector('.popup__image-caption')
 // open popup buttons
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const addElementButton = document.querySelector('.profile__add-button');
-
-
-// text in profile
-export const profileName = document.querySelector('.profile__name');
-export const profileAbout = document.querySelector('.profile__about');
-
-
-
-
-// export const isEscEvent = (e, action) => {
-//   if (e.key === 'Escape') {
-//     const activePopup = document.querySelector('.popup_opened');
-//     action(activePopup);
-//   }
-// };

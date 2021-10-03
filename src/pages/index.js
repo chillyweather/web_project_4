@@ -1,25 +1,24 @@
-import "./pages/index.css";
+import "./index.css";
 
-import FormValidator from './components/FormValidator.js';
-import UserInfo from './components/UserInfo.js';
-import Card from './components/Card.js';
-import Popup from './components/Popup.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import Section from './components/Section.js';
+import FormValidator from '../components/FormValidator.js';
+import UserInfo from '../components/UserInfo.js';
+import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import Section from '../components/Section.js';
 import {
   settings,
+  popupImage,
+  popupImageCaption,
   initialCards,
   cardsContainer,
-  profileName,
-  profileAbout,
   profileEditButton,
   addElementButton,
   editForm,
   addCardForm,
   nameInput,
   jobInput,
-} from './utils/constants.js';
+} from '../utils/constants.js';
 
 //form validation
 const editFormValidator = new FormValidator(settings, editForm);
@@ -52,11 +51,10 @@ const cardList = new Section(
 );
 
 //Image popup instance
-const newPopupWithImage = new PopupWithImage('.popup_type_preview');
+const newPopupWithImage = new PopupWithImage('.popup_type_preview', popupImage, popupImageCaption);
 //Edit profile popup instance
 const editProfileModal = new PopupWithForm('.popup_type_profile', (data) => {
-  profileName.textContent = data.name;
-  profileAbout.textContent = data.about;
+  userInfo.setUserInfo(data.name, data.about);
 });
 //Add element popup instance
 const addElementModal = new PopupWithForm('.popup_type_add-element', (data) => {
@@ -69,10 +67,14 @@ profileEditButton.addEventListener('click', () => {
   const profileData = userInfo.getUserInfo();
   nameInput.value = profileData.userName;
   jobInput.value = profileData.userJob;
+  editFormValidator.resetValidation();
   editProfileModal.open();
 });
 //Add element button event listener
-addElementButton.addEventListener('click', () => addElementModal.open());
+addElementButton.addEventListener('click', () => {
+  addElementFormValidator.resetValidation();
+  addElementModal.open();
+});
 
 //Event listeners for external classes
 editProfileModal.setEventListeners();
