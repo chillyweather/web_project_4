@@ -1,5 +1,6 @@
-import "./index.css";
+import './index.css';
 
+import Api from '../components/Api.js';
 import FormValidator from '../components/FormValidator.js';
 import UserInfo from '../components/UserInfo.js';
 import Card from '../components/Card.js';
@@ -10,7 +11,6 @@ import {
   settings,
   popupImage,
   popupImageCaption,
-  initialCards,
   cardsContainer,
   profileEditButton,
   addElementButton,
@@ -20,6 +20,11 @@ import {
   jobInput,
 } from '../utils/constants.js';
 
+//Api
+const api = new Api({
+  baseUrl: 'https://around.nomoreparties.co/v1/group-12/',
+  authToken: 'a0741150-1ecd-4e0a-82be-ba6cc5789e2b',
+});
 //form validation
 const editFormValidator = new FormValidator(settings, editForm);
 const addElementFormValidator = new FormValidator(settings, addCardForm);
@@ -32,35 +37,63 @@ function createCard(data, templateElement) {
   return newCard;
 }
 
+
 //UserInfo
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
   userJobSelector: '.profile__about',
 });
 
+api.getUserInfo().then(userData => {
+  userInfo.setUserInfo(userData.name, userData.about)
+});
+
+
 //Add card to page
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      const cardElement = createCard(item, '#element-template');
-      cardList.addItem(cardElement);
+api.getCardList().then((data) => {
+  const cardList = new Section(
+    {
+      items: data,
+      renderer: (item) => {
+        const cardElement = createCard(item, '#element-template');
+        cardList.addItem(cardElement);
+      },
     },
-  },
-  cardsContainer
-);
+    cardsContainer
+  );
+
+  addElementButton.addEventListener('click', () => {
+    addElementFormValidator.resetValidation();
+    addElementModal.open();
+  });
+
+  const addElementModal = new PopupWithForm('.popup_type_add-element', (data) => {
+    api.addCard(data).then(cardData => {
+      const newCard = createCard(cardData, '#element-template');
+      cardList.addItem(newCard);
+    });
+  });
+
+  addElementModal.setEventListeners();
+
+  cardList.renderItems();
+
+});
 
 //Image popup instance
-const newPopupWithImage = new PopupWithImage('.popup_type_preview', popupImage, popupImageCaption);
+const newPopupWithImage = new PopupWithImage(
+  '.popup_type_preview',
+  popupImage,
+  popupImageCaption
+);
 //Edit profile popup instance
+
 const editProfileModal = new PopupWithForm('.popup_type_profile', (data) => {
   userInfo.setUserInfo(data.name, data.about);
 });
+
 //Add element popup instance
-const addElementModal = new PopupWithForm('.popup_type_add-element', (data) => {
-  const newCard = createCard(data, '#element-template');
-  cardList.addItem(newCard);
-});
+
 
 //Edit profile button event listener
 profileEditButton.addEventListener('click', () => {
@@ -71,17 +104,14 @@ profileEditButton.addEventListener('click', () => {
   editProfileModal.open();
 });
 //Add element button event listener
-addElementButton.addEventListener('click', () => {
-  addElementFormValidator.resetValidation();
-  addElementModal.open();
-});
+
 
 //Event listeners for external classes
 editProfileModal.setEventListeners();
-addElementModal.setEventListeners();
+
 newPopupWithImage.setEventListeners();
 
 editFormValidator.enableValidation();
 addElementFormValidator.enableValidation();
 
-cardList.renderItems();
+// cardList.renderItems();
