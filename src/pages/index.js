@@ -37,6 +37,7 @@ function createCard(data, templateElement) {
   return newCard;
 }
 
+// api.removeCard('616862053c2ad300126e5014').then(res => console.log(res));
 
 //UserInfo
 const userInfo = new UserInfo({
@@ -46,6 +47,24 @@ const userInfo = new UserInfo({
 
 api.getUserInfo().then(userData => {
   userInfo.setUserInfo(userData.name, userData.about)
+
+
+  //Edit profile button event listener
+  profileEditButton.addEventListener('click', () => {
+    const profileData = userInfo.getUserInfo();
+    nameInput.value = profileData.userName;
+    jobInput.value = profileData.userJob;
+    editFormValidator.resetValidation();
+    editProfileModal.open();
+  });
+
+  //Edit profile popup instance
+  const editProfileModal = new PopupWithForm('.popup_type_profile', (data) => {
+    userInfo.setUserInfo(data.name, data.about);
+    api.updateUserInfo(data.name, data.about);
+  });
+
+  editProfileModal.setEventListeners();
 });
 
 
@@ -86,28 +105,17 @@ const newPopupWithImage = new PopupWithImage(
   popupImage,
   popupImageCaption
 );
-//Edit profile popup instance
 
-const editProfileModal = new PopupWithForm('.popup_type_profile', (data) => {
-  userInfo.setUserInfo(data.name, data.about);
-});
 
 //Add element popup instance
 
 
-//Edit profile button event listener
-profileEditButton.addEventListener('click', () => {
-  const profileData = userInfo.getUserInfo();
-  nameInput.value = profileData.userName;
-  jobInput.value = profileData.userJob;
-  editFormValidator.resetValidation();
-  editProfileModal.open();
-});
+
 //Add element button event listener
 
 
 //Event listeners for external classes
-editProfileModal.setEventListeners();
+
 
 newPopupWithImage.setEventListeners();
 

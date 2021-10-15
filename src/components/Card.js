@@ -2,6 +2,7 @@ class Card {
   constructor(data, elementSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data.id;
 
     this._elementSelector = elementSelector;
     this._handleCardClick = handleCardClick;
@@ -29,6 +30,10 @@ class Card {
 
   _toggleLikeButton(button) {
     button.classList.toggle('element__like-button_state_active');
+  }
+
+  getId() {
+    return this._id;
   }
 
   getView() {
