@@ -28,7 +28,6 @@ class Card {
         this._handleLikeIcon(this._id);
         this._element.querySelector('.element__like-counter').textContent =
           this._likes.length;
-        console.log(this._likes.length);
         // this._toggleLikeButton(e.target);
       });
 
@@ -66,6 +65,10 @@ class Card {
       .classList.toggle('element__like-button_state_active');
   }
 
+  isLiked() {
+    return this._likes.some((person) => person._id === this._userId);
+  }
+
   getId() {
     return this._id;
   }
@@ -84,9 +87,11 @@ class Card {
         'none';
     }
 
-    const isLiked = this._likes.some((person) => person._id === this._userId);
+    const checkLikes = this._likes.some(
+      (person) => person._id === this._userId
+    );
     // console.log(this._element.querySelector());
-    if (isLiked) {
+    if (checkLikes) {
       this.toggleLikeIcon();
     }
     this._setEventListeners();

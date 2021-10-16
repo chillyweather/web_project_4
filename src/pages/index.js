@@ -57,32 +57,40 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
         () => {
           newPopupWithImage.open(data);
         },
+        //handle delete
         (id) => {
           confirmModal.open();
 
           confirmModal.setAction(() => {
             api.deleteCard(id).then((res) => console.log(res));
-            // newCard.removeCard();
+            newCard.remove();
           });
         },
         userId,
+        //handle likes
         (cardId) => {
-          api.likeCard(cardId).then((res) => {
-            console.log(res);
-            newCard.querySelector('.element__like-counter').textContent =
-              res.likes.length;
-            newCard
-              .querySelector('.element__like-button')
-              .classList.toggle('element__like-button_state_active');
-          });
+          // const isAlreadyLiked = newCard.isLiked();
+          data.likes.some((item) => item._id === userId)
+            ? api
+                .dislikeCard(cardId)
+                .then(
+                  (res) =>
+                    (newCard.querySelector(
+                      '.element__like-counter'
+                    ).textContent = data.likes.length - 1)
+                )
+            : api
+                .likeCard(cardId)
+                .then(
+                  (res) =>
+                    (newCard.querySelector(
+                      '.element__like-counter'
+                    ).textContent = data.likes.length + 1)
+                );
 
-          // data.likes.some((item) => item._id === userId)
-          //   ? api
-          //       .dislikeCard(cardId)
-          //       .then((res) => console.log('I dislike it!', res.likes.length))
-          //   : api.likeCard(cardId).then((res) => {
-          //       console.log('I like it!', res.likes.length);
-          //     });
+          newCard
+            .querySelector('.element__like-button')
+            .classList.toggle('element__like-button_state_active');
         }
       ).getView();
 

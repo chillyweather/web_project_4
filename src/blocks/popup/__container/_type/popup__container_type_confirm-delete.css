@@ -1,0 +1,10 @@
+.popup__container_type_confirm-delete {
+  width: 430px;
+}
+
+@media screen and (max-width: 600px) {
+  .popup__container_type_confirm-delete {
+    width: calc(100% - 38px);
+    padding: 25px 22px;
+  }
+}

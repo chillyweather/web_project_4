@@ -89,7 +89,6 @@ export default class Api {
   }
 
   likeCard(cardId) {
-    console.log(cardId);
     return fetch(`${this._baseUrl}cards/likes/${cardId}`, {
       method: 'PUT',
       headers: {
