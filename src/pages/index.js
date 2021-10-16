@@ -6,6 +6,7 @@ import UserInfo from '../components/UserInfo.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import Section from '../components/Section.js';
 import {
   settings,
@@ -16,6 +17,7 @@ import {
   addElementButton,
   editForm,
   addCardForm,
+  // likesCounter,
   nameInput,
   jobInput,
 } from '../utils/constants.js';
@@ -29,15 +31,7 @@ const api = new Api({
 const editFormValidator = new FormValidator(settings, editForm);
 const addElementFormValidator = new FormValidator(settings, addCardForm);
 
-//create card instance
-function createCard(data, templateElement) {
-  const newCard = new Card(data, templateElement, () => {
-    newPopupWithImage.open(data);
-  }).getView();
-  return newCard;
-}
-
-// api.removeCard('616862053c2ad300126e5014').then(res => console.log(res));
+const confirmModal = new PopupWithSubmit('.popup_type_confirm-delete');
 
 //UserInfo
 const userInfo = new UserInfo({
@@ -45,59 +39,109 @@ const userInfo = new UserInfo({
   userJobSelector: '.profile__about',
 });
 
-api.getUserInfo().then(userData => {
-  userInfo.setUserInfo(userData.name, userData.about)
+let userId;
 
+Promise.all([api.getCardList(), api.getUserInfo()]).then(
+  ([cardData, userData]) => {
+    userInfo.setUserInfo(userData.name, userData.about);
 
-  //Edit profile button event listener
-  profileEditButton.addEventListener('click', () => {
-    const profileData = userInfo.getUserInfo();
-    nameInput.value = profileData.userName;
-    jobInput.value = profileData.userJob;
-    editFormValidator.resetValidation();
-    editProfileModal.open();
-  });
+    userId = userData._id;
 
-  //Edit profile popup instance
-  const editProfileModal = new PopupWithForm('.popup_type_profile', (data) => {
-    userInfo.setUserInfo(data.name, data.about);
-    api.updateUserInfo(data.name, data.about);
-  });
+    function createCard(data, templateElement) {
+      const likes = data.likes;
+      const cardId = data._id;
 
-  editProfileModal.setEventListeners();
-});
+      const newCard = new Card(
+        data,
+        templateElement,
+        () => {
+          newPopupWithImage.open(data);
+        },
+        (id) => {
+          confirmModal.open();
 
+          confirmModal.setAction(() => {
+            api.deleteCard(id).then((res) => console.log(res));
+            // newCard.removeCard();
+          });
+        },
+        userId,
+        (cardId) => {
+          api.likeCard(cardId).then((res) => {
+            console.log(res);
+            newCard.querySelector('.element__like-counter').textContent =
+              res.likes.length;
+            newCard
+              .querySelector('.element__like-button')
+              .classList.toggle('element__like-button_state_active');
+          });
 
-//Add card to page
-api.getCardList().then((data) => {
-  const cardList = new Section(
-    {
-      items: data,
-      renderer: (item) => {
-        const cardElement = createCard(item, '#element-template');
-        cardList.addItem(cardElement);
-      },
-    },
-    cardsContainer
-  );
+          // data.likes.some((item) => item._id === userId)
+          //   ? api
+          //       .dislikeCard(cardId)
+          //       .then((res) => console.log('I dislike it!', res.likes.length))
+          //   : api.likeCard(cardId).then((res) => {
+          //       console.log('I like it!', res.likes.length);
+          //     });
+        }
+      ).getView();
 
-  addElementButton.addEventListener('click', () => {
-    addElementFormValidator.resetValidation();
-    addElementModal.open();
-  });
+      return newCard;
+    }
 
-  const addElementModal = new PopupWithForm('.popup_type_add-element', (data) => {
-    api.addCard(data).then(cardData => {
-      const newCard = createCard(cardData, '#element-template');
-      cardList.addItem(newCard);
+    //Edit profile button event listener
+    profileEditButton.addEventListener('click', () => {
+      const profileData = userInfo.getUserInfo();
+      nameInput.value = profileData.userName;
+      jobInput.value = profileData.userJob;
+      editFormValidator.resetValidation();
+      editProfileModal.open();
     });
-  });
 
-  addElementModal.setEventListeners();
+    //Edit profile popup instance
+    const editProfileModal = new PopupWithForm(
+      '.popup_type_profile',
+      (data) => {
+        userInfo.setUserInfo(data.name, data.about);
+        api.updateUserInfo(data.name, data.about);
+      }
+    );
 
-  cardList.renderItems();
+    const cardList = new Section(
+      {
+        items: cardData,
+        renderer: (item) => {
+          const cardElement = createCard(item, '#element-template');
+          cardList.addItem(cardElement);
+        },
+      },
+      cardsContainer
+    );
 
-});
+    addElementButton.addEventListener('click', () => {
+      addElementFormValidator.resetValidation();
+      addElementModal.open();
+    });
+
+    const addElementModal = new PopupWithForm(
+      '.popup_type_add-element',
+      (data) => {
+        api.addCard(data).then((cardData) => {
+          const newCard = createCard(cardData, '#element-template');
+          cardList.addItem(newCard);
+        });
+      }
+    );
+
+    addElementModal.setEventListeners();
+
+    cardList.renderItems();
+
+    editProfileModal.setEventListeners();
+  }
+);
+
+//
 
 //Image popup instance
 const newPopupWithImage = new PopupWithImage(
@@ -106,18 +150,14 @@ const newPopupWithImage = new PopupWithImage(
   popupImageCaption
 );
 
-
 //Add element popup instance
-
-
 
 //Add element button event listener
 
-
 //Event listeners for external classes
 
-
 newPopupWithImage.setEventListeners();
+confirmModal.setEventListeners();
 
 editFormValidator.enableValidation();
 addElementFormValidator.enableValidation();

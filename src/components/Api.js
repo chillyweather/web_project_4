@@ -1,6 +1,3 @@
-//auth: a0741150-1ecd-4e0a-82be-ba6cc5789e2b
-//url: https://around.nomoreparties.co/v1/group-12/
-
 export default class Api {
   constructor({ baseUrl, authToken }) {
     this._baseUrl = baseUrl;
@@ -37,18 +34,19 @@ export default class Api {
 
   updateUserInfo(name, about) {
     return fetch(`${this._baseUrl}users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
         authorization: this._authToken,
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name,
-        about
-      })
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    )
+        about,
+      }),
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
       .catch((err) => {
         console.log(err);
       });
@@ -56,33 +54,69 @@ export default class Api {
 
   addCard({ name, link }) {
     return fetch(`${this._baseUrl}cards`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         authorization: this._authToken,
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name,
-        link
-      })
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    )
+        link,
+      }),
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
       .catch((err) => {
         console.log(err);
       });
   }
 
-  removeCard(cardId) {
+  deleteCard(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         authorization: this._authToken,
-        "Content-Type": "application/json"
-      }
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    )
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  likeCard(cardId) {
+    console.log(cardId);
+    return fetch(`${this._baseUrl}cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._authToken,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  dislikeCard(cardId) {
+    console.log(cardId);
+    return fetch(`${this._baseUrl}cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authToken,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      )
       .catch((err) => {
         console.log(err);
       });
