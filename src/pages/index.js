@@ -8,15 +8,19 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import Section from '../components/Section.js';
+import PopupForAvatarUpdate from '../components/PopupForAvatarUpdate.js';
 import {
   settings,
   popupImage,
   popupImageCaption,
   cardsContainer,
   profileEditButton,
+  userProfilePicture,
+  editProfilePictureButton,
   addElementButton,
   editForm,
   addCardForm,
+  avatarForm,
   // likesCounter,
   nameInput,
   jobInput,
@@ -27,9 +31,11 @@ const api = new Api({
   baseUrl: 'https://around.nomoreparties.co/v1/group-12/',
   authToken: 'a0741150-1ecd-4e0a-82be-ba6cc5789e2b',
 });
+
 //form validation
 const editFormValidator = new FormValidator(settings, editForm);
 const addElementFormValidator = new FormValidator(settings, addCardForm);
+const addAvatarFormValidator = new FormValidator(settings, avatarForm);
 
 const confirmModal = new PopupWithSubmit('.popup_type_confirm-delete');
 
@@ -37,13 +43,14 @@ const confirmModal = new PopupWithSubmit('.popup_type_confirm-delete');
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name',
   userJobSelector: '.profile__about',
+  userAvatarSelector: '.profile__avatar',
 });
 
 let userId;
 
 Promise.all([api.getCardList(), api.getUserInfo()]).then(
   ([cardData, userData]) => {
-    userInfo.setUserInfo(userData.name, userData.about);
+    userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
 
     userId = userData._id;
 
@@ -115,6 +122,25 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
       }
     );
 
+    //Edit profile picture button listener
+    editProfilePictureButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      addAvatarFormValidator.resetValidation();
+      editAvatarModal.open();
+    });
+
+    //Edit profile picture popup instance
+
+    const editAvatarModal = new PopupForAvatarUpdate(
+      '.popup_type_profile-avatar',
+      (avatarLink) => {
+        api.updateProfilePicture(avatarLink).then((res) => {
+          console.log(res.avatar);
+          userProfilePicture.style.backgroundImage = `url(${res.avatar})`;
+        });
+      }
+    );
+
     const cardList = new Section(
       {
         items: cardData,
@@ -146,6 +172,8 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
     cardList.renderItems();
 
     editProfileModal.setEventListeners();
+
+    editAvatarModal.setEventListeners();
   }
 );
 
@@ -169,5 +197,6 @@ confirmModal.setEventListeners();
 
 editFormValidator.enableValidation();
 addElementFormValidator.enableValidation();
+addAvatarFormValidator.enableValidation();
 
 // cardList.renderItems();

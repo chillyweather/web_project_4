@@ -2,7 +2,7 @@
   position: relative;
   width: 120px;
   height: 120px;
-  background-image: url(../../../images/image.jpg);
+  /* background-image: url(../../../images/image.jpg); */
   background-position: center;
   background-size: contain;
   border-radius: 50%;
@@ -17,7 +17,7 @@
   background-color: rgba(0, 0, 0, 0);
 }
 
-.profile__avatar:hover {
+.profile__avatar-container:hover .profile__avatar {
   opacity: 0.2;
   /* background-color: rgba(0, 0, 0, 0); */
 }

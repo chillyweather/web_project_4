@@ -14,6 +14,9 @@ export const editForm = document.querySelector(
 export const addCardForm = document.querySelector(
   '.popup__content_type_add-element'
 );
+export const avatarForm = document.querySelector(
+  '.popup__content_type_profile-avatar'
+);
 
 //default profile data
 export const nameInput = document.querySelector(
@@ -38,6 +41,10 @@ export const profileEditButton = document.querySelector(
   '.profile__edit-button'
 );
 export const addElementButton = document.querySelector('.profile__add-button');
+export const editProfilePictureButton = document.querySelector(
+  '.profile__avatar-edit-button'
+);
+export const userProfilePicture = document.querySelector('.profile__avatar');
 
 export const deleteButton = document.querySelector('.element__trash-button');
 // export const likesCounter = document.querySelector('.element__like-counter');

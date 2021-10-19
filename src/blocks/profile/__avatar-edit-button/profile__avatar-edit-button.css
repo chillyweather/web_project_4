@@ -2,23 +2,21 @@
   position: absolute;
   width: 26px;
   height: 26px;
+  cursor: pointer;
   background-image: url('../../../images/svg/edit-avatar.svg');
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
-  cursor: pointer;
-  visibility: hidden;
+  z-index: 2;
   opacity: 0;
+  /* visibility: hidden;
+  opacity: 0; */
   transition: all 0s, opacity 0.5s ease-in-out;
 }
 
-.profile__avatar:hover + .profile__avatar-edit-button {
-  visibility: visible;
+.profile__avatar-container:hover .profile__avatar-edit-button {
+  pointer-events: visibleFill;
   opacity: 1;
 }
-
-/* .profile__avatar-container:hover + .profile__avatar-edit-button {
-  visibility: visible;
-} */
