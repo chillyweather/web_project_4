@@ -36,6 +36,11 @@ export const popupImageCaption = document.querySelector(
   '.popup__image-caption'
 );
 
+//popup submit button
+export const popupSubmitButton = document.querySelector(
+  '.popup__submit-button'
+);
+
 // open popup buttons
 export const profileEditButton = document.querySelector(
   '.profile__edit-button'

@@ -13,6 +13,7 @@ import {
   settings,
   popupImage,
   popupImageCaption,
+  popupSubmitButton,
   cardsContainer,
   profileEditButton,
   userProfilePicture,
@@ -46,11 +47,23 @@ const userInfo = new UserInfo({
   userAvatarSelector: '.profile__avatar',
 });
 
+function renderLoading(isSaving) {
+  if (isSaving) {
+    popupSubmitButton.textContent = 'Saving';
+    spinner.classList.add('spinner_visible');
+    content.classList.add('content_hidden');
+  } else {
+    content.classList.remove('content_hidden');
+    spinner.classList.remove('spinner_visible');
+  }
+}
+
 let userId;
 
 Promise.all([api.getCardList(), api.getUserInfo()]).then(
   ([cardData, userData]) => {
-    userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+    userInfo.setUserInfo(userData.name, userData.about);
+    userProfilePicture.style.backgroundImage = `url(${userData.avatar})`;
 
     userId = userData._id;
 
@@ -117,6 +130,7 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
     const editProfileModal = new PopupWithForm(
       '.popup_type_profile',
       (data) => {
+        console.log(data);
         userInfo.setUserInfo(data.name, data.about);
         api.updateUserInfo(data.name, data.about);
       }
@@ -134,10 +148,17 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
     const editAvatarModal = new PopupForAvatarUpdate(
       '.popup_type_profile-avatar',
       (avatarLink) => {
-        api.updateProfilePicture(avatarLink).then((res) => {
-          console.log(res.avatar);
-          userProfilePicture.style.backgroundImage = `url(${res.avatar})`;
-        });
+        editAvatarModal.setButtonText('Saving...');
+        api
+          .updateProfilePicture(avatarLink)
+          .then((res) => {
+            // console.log(editAvatarModal.te)
+            userProfilePicture.style.backgroundImage = `url(${res.avatar})`;
+          })
+          .finally(() => {
+            editAvatarModal.setButtonText('Save');
+            editAvatarModal.close();
+          });
       }
     );
 

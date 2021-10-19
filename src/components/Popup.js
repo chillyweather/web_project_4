@@ -1,6 +1,9 @@
 export default class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
+    this._submitButton = this._popupElement.querySelector(
+      '.popup__submit-button'
+    );
   }
 
   open() {
@@ -27,12 +30,15 @@ export default class Popup {
     }
   };
 
-  setEventListeners() {
-    this._popupElement.querySelector('.popup__close-button').addEventListener(
-      'click', () => {
-        this.close();
-      }
-    )
+  setButtonText(text) {
+    this._submitButton.textContent = text;
   }
 
+  setEventListeners() {
+    this._popupElement
+      .querySelector('.popup__close-button')
+      .addEventListener('click', () => {
+        this.close();
+      });
+  }
 }
