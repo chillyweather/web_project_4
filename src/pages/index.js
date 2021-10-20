@@ -82,8 +82,9 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
           confirmModal.open();
 
           confirmModal.setAction(() => {
-            api.deleteCard(id).then((res) => console.log(res));
+            api.deleteCard(id);
             newCard.remove();
+            confirmModal.close();
           });
         },
         userId,
@@ -130,9 +131,12 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
     const editProfileModal = new PopupWithForm(
       '.popup_type_profile',
       (data) => {
-        console.log(data);
+        editProfileModal.setButtonText('Saving...');
         userInfo.setUserInfo(data.name, data.about);
-        api.updateUserInfo(data.name, data.about);
+        api.updateUserInfo(data.name, data.about).finally(() => {
+          editProfileModal.setButtonText('Save');
+          editProfileModal.close();
+        });
       }
     );
 
@@ -144,7 +148,6 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
     });
 
     //Edit profile picture popup instance
-
     const editAvatarModal = new PopupForAvatarUpdate(
       '.popup_type_profile-avatar',
       (avatarLink) => {
@@ -152,7 +155,6 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
         api
           .updateProfilePicture(avatarLink)
           .then((res) => {
-            // console.log(editAvatarModal.te)
             userProfilePicture.style.backgroundImage = `url(${res.avatar})`;
           })
           .finally(() => {
@@ -181,24 +183,26 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
     const addElementModal = new PopupWithForm(
       '.popup_type_add-element',
       (data) => {
-        api.addCard(data).then((cardData) => {
-          const newCard = createCard(cardData, '#element-template');
-          cardList.addItem(newCard);
-        });
+        addElementModal.setButtonText('Saving...');
+        api
+          .addCard(data)
+          .then((cardData) => {
+            const newCard = createCard(cardData, '#element-template');
+            cardList.addItem(newCard);
+          })
+          .finally(() => {
+            addElementModal.setButtonText('Create');
+            addElementModal.close();
+          });
       }
     );
-
+    //set event listeners
     addElementModal.setEventListeners();
-
     cardList.renderItems();
-
     editProfileModal.setEventListeners();
-
     editAvatarModal.setEventListeners();
   }
 );
-
-//
 
 //Image popup instance
 const newPopupWithImage = new PopupWithImage(
@@ -207,17 +211,9 @@ const newPopupWithImage = new PopupWithImage(
   popupImageCaption
 );
 
-//Add element popup instance
-
-//Add element button event listener
-
-//Event listeners for external classes
-
 newPopupWithImage.setEventListeners();
 confirmModal.setEventListeners();
 
 editFormValidator.enableValidation();
 addElementFormValidator.enableValidation();
 addAvatarFormValidator.enableValidation();
-
-// cardList.renderItems();
