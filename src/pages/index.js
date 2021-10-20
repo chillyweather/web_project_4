@@ -47,17 +47,6 @@ const userInfo = new UserInfo({
   userAvatarSelector: '.profile__avatar',
 });
 
-function renderLoading(isSaving) {
-  if (isSaving) {
-    popupSubmitButton.textContent = 'Saving';
-    spinner.classList.add('spinner_visible');
-    content.classList.add('content_hidden');
-  } else {
-    content.classList.remove('content_hidden');
-    spinner.classList.remove('spinner_visible');
-  }
-}
-
 let userId;
 
 Promise.all([api.getCardList(), api.getUserInfo()]).then(
@@ -65,12 +54,10 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
     userInfo.setUserInfo(userData.name, userData.about);
     userProfilePicture.style.backgroundImage = `url(${userData.avatar})`;
 
+    let likesCount;
     userId = userData._id;
 
     function createCard(data, templateElement) {
-      const likes = data.likes;
-      const cardId = data._id;
-
       const newCard = new Card(
         data,
         templateElement,
@@ -90,24 +77,13 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
         userId,
         //handle likes
         (cardId) => {
-          // const isAlreadyLiked = newCard.isLiked();
-          data.likes.some((item) => item._id === userId)
-            ? api
-                .dislikeCard(cardId)
-                .then(
-                  (res) =>
-                    (newCard.querySelector(
-                      '.element__like-counter'
-                    ).textContent = data.likes.length - 1)
-                )
-            : api
-                .likeCard(cardId)
-                .then(
-                  (res) =>
-                    (newCard.querySelector(
-                      '.element__like-counter'
-                    ).textContent = data.likes.length + 1)
-                );
+          const likesCounter = newCard.querySelector('.element__like-counter');
+
+          if (data.likes.some((item) => item._id === userId)) {
+            api.dislikeCard(cardId);
+          } else {
+            api.likeCard(cardId);
+          }
 
           newCard
             .querySelector('.element__like-button')
@@ -117,7 +93,6 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
 
       return newCard;
     }
-
     //Edit profile button event listener
     profileEditButton.addEventListener('click', () => {
       const profileData = userInfo.getUserInfo();
