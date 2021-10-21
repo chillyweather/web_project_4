@@ -31,7 +31,9 @@ export default class Popup {
   };
 
   setButtonText(text) {
-    this._submitButton.textContent = text;
+    if (this._submitButton) {
+      this._submitButton.textContent = text;
+    }
   }
 
   setEventListeners() {

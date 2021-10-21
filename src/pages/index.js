@@ -8,7 +8,6 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import Section from '../components/Section.js';
-import PopupForAvatarUpdate from '../components/PopupForAvatarUpdate.js';
 import {
   settings,
   popupImage,
@@ -108,10 +107,15 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
       (data) => {
         editProfileModal.setButtonText('Saving...');
         userInfo.setUserInfo(data.name, data.about);
-        api.updateUserInfo(data.name, data.about).finally(() => {
-          editProfileModal.setButtonText('Save');
-          editProfileModal.close();
-        });
+        api
+          .updateUserInfo(data.name, data.about)
+          .then(() => {
+            editProfileModal.setButtonText('Save');
+            editProfileModal.close();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     );
 
@@ -123,12 +127,12 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
     });
 
     //Edit profile picture popup instance
-    const editAvatarModal = new PopupForAvatarUpdate(
+    const editAvatarModal = new PopupWithForm(
       '.popup_type_profile-avatar',
       (avatarLink) => {
         editAvatarModal.setButtonText('Saving...');
         api
-          .updateProfilePicture(avatarLink)
+          .updateProfilePicture(avatarLink['avatar-link'])
           .then((res) => {
             userProfilePicture.style.backgroundImage = `url(${res.avatar})`;
           })
