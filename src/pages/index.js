@@ -50,8 +50,8 @@ let userId;
 
 Promise.all([api.getCardList(), api.getUserInfo()]).then(
   ([cardData, userData]) => {
-    userInfo.setUserInfo(userData.name, userData.about);
-    userProfilePicture.style.backgroundImage = `url(${userData.avatar})`;
+    console.log(userData);
+    userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
 
     let likesCount;
     userId = userData._id;
@@ -68,25 +68,46 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
           confirmModal.open();
 
           confirmModal.setAction(() => {
-            api.deleteCard(id);
-            newCard.remove();
-            confirmModal.close();
+            api
+              .deleteCard(id)
+              .then(() => {
+                newCard.remove();
+                confirmModal.close();
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           });
         },
         userId,
         //handle likes
         (cardId) => {
           const likesCounter = newCard.querySelector('.element__like-counter');
+          const likeIcon = newCard.querySelector('.element__like-button');
+          const isLiked = data.likes.some((item) => item._id === userId);
 
-          if (data.likes.some((item) => item._id === userId)) {
-            api.dislikeCard(cardId);
+          if (isLiked) {
+            console.log(isLiked);
+            api
+              .dislikeCard(cardId)
+              .then((res) => {
+                likesCounter.textContent = res.likes.length;
+                likeIcon.classList.remove('element__like-button_state_active');
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           } else {
-            api.likeCard(cardId);
+            api
+              .likeCard(cardId)
+              .then((res) => {
+                likesCounter.textContent = res.likes.length;
+                likeIcon.classList.add('element__like-button_state_active');
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           }
-
-          newCard
-            .querySelector('.element__like-button')
-            .classList.toggle('element__like-button_state_active');
         }
       ).getView();
 
@@ -106,10 +127,12 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
       '.popup_type_profile',
       (data) => {
         editProfileModal.setButtonText('Saving...');
-        userInfo.setUserInfo(data.name, data.about);
+        const avatarLink = userProfilePicture.style.backgroundImage;
+        console.log(avatarLink);
         api
           .updateUserInfo(data.name, data.about)
           .then(() => {
+            userInfo.setUserInfo(data.name, data.about, avatarLink);
             editProfileModal.setButtonText('Save');
             editProfileModal.close();
           })
@@ -135,10 +158,11 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
           .updateProfilePicture(avatarLink['avatar-link'])
           .then((res) => {
             userProfilePicture.style.backgroundImage = `url(${res.avatar})`;
-          })
-          .finally(() => {
             editAvatarModal.setButtonText('Save');
             editAvatarModal.close();
+          })
+          .catch((err) => {
+            console.log(err);
           });
       }
     );
@@ -168,10 +192,11 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
           .then((cardData) => {
             const newCard = createCard(cardData, '#element-template');
             cardList.addItem(newCard);
-          })
-          .finally(() => {
             addElementModal.setButtonText('Create');
             addElementModal.close();
+          })
+          .catch((err) => {
+            console.log(err);
           });
       }
     );

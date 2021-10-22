@@ -27,11 +27,11 @@ class Card {
       .querySelector('.element__like-button')
       .addEventListener('click', () => {
         this._handleLikeIcon(this._id);
-        if (this.isLiked()) {
-          this._likesCounter.textContent = this._likes.length - 1;
-        } else {
-          this._likesCounter.textContent = this._likes.length + 1;
-        }
+        // if (this._isLiked()) {
+        //   this._likesCounter.textContent = this._likes.length - 1;
+        // } else {
+        //   this._likesCounter.textContent = this._likes.length + 1;
+        // }
       });
 
     this._element
@@ -59,7 +59,7 @@ class Card {
       .cloneNode(true);
   }
 
-  isLiked() {
+  _isLiked() {
     return this._likes.some((person) => person._id === this._userId);
   }
 
@@ -81,12 +81,10 @@ class Card {
         'none';
     }
 
-    const checkLikes = this._likes.some((person) => {
-      person._id === this._userId;
-    });
-
-    if (checkLikes) {
-      this.toggleLikeIcon();
+    if (this._isLiked()) {
+      this._element
+        .querySelector('.element__like-button')
+        .classList.toggle('element__like-button_state_active');
     }
     this._setEventListeners();
     return this._element;

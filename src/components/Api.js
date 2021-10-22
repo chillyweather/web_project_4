@@ -62,13 +62,9 @@ export default class Api {
       body: JSON.stringify({
         avatar,
       }),
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   addCard({ name, link }) {
@@ -82,13 +78,9 @@ export default class Api {
         name,
         link,
       }),
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   deleteCard(cardId) {
@@ -98,13 +90,9 @@ export default class Api {
         authorization: this._authToken,
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   likeCard(cardId) {
@@ -114,29 +102,20 @@ export default class Api {
         authorization: this._authToken,
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   dislikeCard(cardId) {
-    console.log(cardId);
     return fetch(`${this._baseUrl}cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._authToken,
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 }
