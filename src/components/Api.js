@@ -4,36 +4,44 @@ export default class Api {
     this._authToken = authToken;
   }
 
+  //seems like not very elegant solution, but probably that's the
+  //best I can do for now ))
+  _checkResponse(prom) {
+    const response = prom
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then((data) => {
+        return data;
+      });
+    return response;
+  }
+
   getCardList() {
-    return fetch(`${this._baseUrl}cards`, {
+    const cards = fetch(`${this._baseUrl}cards`, {
       headers: {
         authorization: this._authToken,
       },
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    });
+
+    return this._checkResponse(cards);
   }
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}users/me`, {
+    const userInfo = fetch(`${this._baseUrl}users/me`, {
       headers: {
         authorization: this._authToken,
       },
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    });
+
+    return this._checkResponse(userInfo);
   }
 
   updateUserInfo(name, about) {
-    return fetch(`${this._baseUrl}users/me`, {
+    const updateUser = fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._authToken,
@@ -43,17 +51,13 @@ export default class Api {
         name,
         about,
       }),
-    })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(err);
-      });
+    });
+
+    return this._checkResponse(updateUser);
   }
 
   updateProfilePicture(avatar) {
-    return fetch(`${this._baseUrl}users/me/avatar`, {
+    const updateAvatar = fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this._authToken,
@@ -62,13 +66,13 @@ export default class Api {
       body: JSON.stringify({
         avatar,
       }),
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    });
+
+    return this._checkResponse(updateAvatar);
   }
 
   addCard({ name, link }) {
-    return fetch(`${this._baseUrl}cards`, {
+    const card = fetch(`${this._baseUrl}cards`, {
       method: 'POST',
       headers: {
         authorization: this._authToken,
@@ -78,44 +82,44 @@ export default class Api {
         name,
         link,
       }),
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    });
+
+    return this._checkResponse(card);
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._baseUrl}cards/${cardId}`, {
+    const removeCard = fetch(`${this._baseUrl}cards/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._authToken,
         'Content-Type': 'application/json',
       },
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    });
+
+    return this._checkResponse(removeCard);
   }
 
   likeCard(cardId) {
-    return fetch(`${this._baseUrl}cards/likes/${cardId}`, {
+    const like = fetch(`${this._baseUrl}cards/likes/${cardId}`, {
       method: 'PUT',
       headers: {
         authorization: this._authToken,
         'Content-Type': 'application/json',
       },
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    });
+
+    return this._checkResponse(like);
   }
 
   dislikeCard(cardId) {
-    return fetch(`${this._baseUrl}cards/likes/${cardId}`, {
+    const dislike = fetch(`${this._baseUrl}cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._authToken,
         'Content-Type': 'application/json',
       },
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    });
+
+    return this._checkResponse(dislike);
   }
 }

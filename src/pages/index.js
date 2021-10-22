@@ -50,10 +50,8 @@ let userId;
 
 Promise.all([api.getCardList(), api.getUserInfo()]).then(
   ([cardData, userData]) => {
-    console.log(userData);
     userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
 
-    let likesCount;
     userId = userData._id;
 
     function createCard(data, templateElement) {
@@ -128,7 +126,6 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
       (data) => {
         editProfileModal.setButtonText('Saving...');
         const avatarLink = userProfilePicture.style.backgroundImage;
-        console.log(avatarLink);
         api
           .updateUserInfo(data.name, data.about)
           .then(() => {
