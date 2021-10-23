@@ -125,16 +125,18 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
       '.popup_type_profile',
       (data) => {
         editProfileModal.setButtonText('Saving...');
-        const avatarLink = userProfilePicture.style.backgroundImage;
+        // const avatarLink = userProfilePicture.style.backgroundImage;
         api
           .updateUserInfo(data.name, data.about)
-          .then(() => {
-            userInfo.setUserInfo(data.name, data.about, avatarLink);
-            editProfileModal.setButtonText('Save');
+          .then((userData) => {
+            userInfo.setUserInfo(data.name, data.about, userData.avatar);
             editProfileModal.close();
           })
           .catch((err) => {
             console.log(err);
+          })
+          .finally(() => {
+            editProfileModal.setButtonText('Save');
           });
       }
     );
@@ -153,13 +155,19 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
         editAvatarModal.setButtonText('Saving...');
         api
           .updateProfilePicture(avatarLink['avatar-link'])
-          .then((res) => {
-            userProfilePicture.style.backgroundImage = `url(${res.avatar})`;
-            editAvatarModal.setButtonText('Save');
+          .then((userData) => {
+            userInfo.setUserInfo(
+              userData.name,
+              userData.about,
+              userData.avatar
+            );
             editAvatarModal.close();
           })
           .catch((err) => {
             console.log(err);
+          })
+          .finally(() => {
+            editProfileModal.setButtonText('Save');
           });
       }
     );
@@ -189,11 +197,13 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
           .then((cardData) => {
             const newCard = createCard(cardData, '#element-template');
             cardList.addItem(newCard);
-            addElementModal.setButtonText('Create');
             addElementModal.close();
           })
           .catch((err) => {
             console.log(err);
+          })
+          .finally(() => {
+            addElementModal.setButtonText('Create');
           });
       }
     );
