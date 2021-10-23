@@ -13,7 +13,6 @@ class Card {
     this._link = data.link;
     this._id = data._id;
     this._likes = data.likes;
-    // console.log(this._likes.length);
 
     this._handleDeleteCard = handleDeleteCard;
     this._elementSelector = elementSelector;
@@ -27,11 +26,6 @@ class Card {
       .querySelector('.element__like-button')
       .addEventListener('click', () => {
         this._handleLikeIcon(this._id);
-        // if (this._isLiked()) {
-        //   this._likesCounter.textContent = this._likes.length - 1;
-        // } else {
-        //   this._likesCounter.textContent = this._likes.length + 1;
-        // }
       });
 
     this._element
@@ -66,6 +60,13 @@ class Card {
   getId() {
     return this._id;
   }
+
+  // updateLikes(likesLength) {
+  //   const likesCounter = this._element.querySelector('.element__like-counter');
+  //   const likeIcon = this._element.querySelector('.element__like-button');
+  //   likesCounter.textContent = likesLength;
+  //   likeIcon.classList.remove('element__like-button_state_active');
+  // }
 
   getView() {
     this._element = this._getTemplate();

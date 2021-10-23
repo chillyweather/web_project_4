@@ -12,10 +12,8 @@ import {
   settings,
   popupImage,
   popupImageCaption,
-  popupSubmitButton,
   cardsContainer,
   profileEditButton,
-  userProfilePicture,
   editProfilePictureButton,
   addElementButton,
   editForm,
@@ -89,6 +87,10 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
             api
               .dislikeCard(cardId)
               .then((res) => {
+                //i'll try your advise here a bit later
+                //for now if i do it - i get "TypeError: newCard.updateLikes is not a function
+                //at index.js:93" error.
+                //I have to take some time and think ))
                 likesCounter.textContent = res.likes.length;
                 likeIcon.classList.remove('element__like-button_state_active');
               })

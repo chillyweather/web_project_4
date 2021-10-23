@@ -4,8 +4,6 @@ export default class Api {
     this._authToken = authToken;
   }
 
-  //seems like not very elegant solution, but probably that's the
-  //best I can do for now ))
   _checkResponse(prom) {
     const response = prom
       .then((res) => {
