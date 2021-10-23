@@ -61,12 +61,12 @@ class Card {
     return this._id;
   }
 
-  // updateLikes(likesLength) {
-  //   const likesCounter = this._element.querySelector('.element__like-counter');
-  //   const likeIcon = this._element.querySelector('.element__like-button');
-  //   likesCounter.textContent = likesLength;
-  //   likeIcon.classList.remove('element__like-button_state_active');
-  // }
+  updateLikes(likesLength) {
+    const likesCounter = this._element.querySelector('.element__like-counter');
+    const likeIcon = this._element.querySelector('.element__like-button');
+    likesCounter.textContent = likesLength;
+    likeIcon.classList.toggle('element__like-button_state_active');
+  }
 
   getView() {
     this._element = this._getTemplate();

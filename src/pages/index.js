@@ -78,8 +78,8 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
         userId,
         //handle likes
         (cardId) => {
-          const likesCounter = newCard.querySelector('.element__like-counter');
-          const likeIcon = newCard.querySelector('.element__like-button');
+          // const likesCounter = newCard.querySelector('.element__like-counter');
+          // const likeIcon = newCard.querySelector('.element__like-button');
           const isLiked = data.likes.some((item) => item._id === userId);
 
           if (isLiked) {
@@ -87,12 +87,12 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
             api
               .dislikeCard(cardId)
               .then((res) => {
-                //i'll try your solution here a bit later
-                //for now if i do it - i get "TypeError: newCard.updateLikes is not a function
-                //at index.js:93" error.
-                //I have to take some time and think ))
-                likesCounter.textContent = res.likes.length;
-                likeIcon.classList.remove('element__like-button_state_active');
+                //THANKS!!!!!!!!!
+                //now everything great!
+                //that misplacement of .getView()
+                //destroyed my life in all possible ways
+                //for a couple of days... as i see now
+                newCard.updateLikes(res.likes.length);
               })
               .catch((err) => {
                 console.log(err);
@@ -101,17 +101,16 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
             api
               .likeCard(cardId)
               .then((res) => {
-                likesCounter.textContent = res.likes.length;
-                likeIcon.classList.add('element__like-button_state_active');
+                newCard.updateLikes(res.likes.length);
               })
               .catch((err) => {
                 console.log(err);
               });
           }
         }
-      ).getView();
+      );
 
-      return newCard;
+      return newCard.getView();
     }
     //Edit profile button event listener
     profileEditButton.addEventListener('click', () => {
@@ -168,7 +167,7 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
             console.log(err);
           })
           .finally(() => {
-            editProfileModal.setButtonText('Save');
+            editAvatarModal.setButtonText('Save');
           });
       }
     );
