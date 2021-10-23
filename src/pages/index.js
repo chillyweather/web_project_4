@@ -87,7 +87,7 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
             api
               .dislikeCard(cardId)
               .then((res) => {
-                //i'll try your advise here a bit later
+                //i'll try your solution here a bit later
                 //for now if i do it - i get "TypeError: newCard.updateLikes is not a function
                 //at index.js:93" error.
                 //I have to take some time and think ))
@@ -127,7 +127,6 @@ Promise.all([api.getCardList(), api.getUserInfo()]).then(
       '.popup_type_profile',
       (data) => {
         editProfileModal.setButtonText('Saving...');
-        // const avatarLink = userProfilePicture.style.backgroundImage;
         api
           .updateUserInfo(data.name, data.about)
           .then((userData) => {
